@@ -1,1 +1,4 @@
-Javascript TDD kata using Jasmine with Node
+Evergreen
+=========
+
+Evergreen glues together some pieces to simplify JavaScript unit testing in Rails3 applications.

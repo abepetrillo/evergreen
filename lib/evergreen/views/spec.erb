@@ -1,0 +1,37 @@
+<!doctype html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/lib/jasmine.css">
+    <script src="/lib/jasmine-0.10.4.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/lib/TrivialReporter.js"></script>
+    <script type="text/javascript" src="/lib/consolex.js"></script>
+    <script type="text/javascript" src="/evergreen/evergreen.js"></script>
+    <script src="/spec/<%= @spec.name %>.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      (function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.addReporter(new jasmine.TrivialReporter());
+        jasmineEnv.addReporter({
+          reportRunnerStarting: function(runner) {
+            jasmine.results = []
+          }, 
+          reportSpecResults: function(spec) {
+            var results = spec.results();
+            var item = results.getItems()[0] || {};
+            jasmine.results.push({
+              name: spec.getFullName(),
+              passed: results.failedCount === 0,
+              message: item.message,
+              trace: item.trace
+            });
+          }
+        });
+
+        jasmineEnv.execute();
+      })();
+    </script>
+  </body>
+</html>

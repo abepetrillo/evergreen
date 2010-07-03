@@ -1,15 +1,18 @@
-require('./implementation')
+require('/implementation.js')
 
 describe('with no tokens', function () {
   it("should return an empty string if an empty string is given", function() {
+    expect(foo).toEqual('foo');
   })
 
   it("should return a string unchanged", function() {
+    expect(foo).toEqual('foo');
   })
 })
 
 describe('with one token', function () {
   it("should replace the token with an empty string if no value is passed in", function() {
+    expect(foo).toEqual('foo');
   })
 
   it("should replace the token with a given value", function() {
@@ -32,5 +35,3 @@ describe('with two tokens (OMG!?)', function () {
   it("should replace tokens without value with the empty string", function() {
   })
 })
-
-jasmine.run()
