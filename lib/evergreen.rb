@@ -24,7 +24,18 @@ module Evergreen
           use Rack::Static, :urls => ["/lib"], :root => File.expand_path('jasmine', File.dirname(__FILE__))
           use Rack::Static, :urls => ["/evergreen"], :root => File.dirname(__FILE__)
 
+          helpers do
+            def url(path)
+              request.env['SCRIPT_NAME'].to_s + path.to_s
+            end
+          end
+
           get '/' do
+            @specs = Spec.all(root)
+            erb :list
+          end
+
+          get '/list' do
             @specs = Spec.all(root)
             erb :list
           end
