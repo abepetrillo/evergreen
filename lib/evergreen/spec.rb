@@ -26,35 +26,5 @@ module Evergreen
       "/run/#{name}"
     end
 
-    def passed?
-      run unless has_run?
-      results.all? { |row| row.passed }
-    end
-
-    def failure_message
-      run unless has_run?
-      results.each do |row|
-        puts "Failed: #{row.name}"
-        puts "    #{row.message}"
-        puts "    in #{row.trace.fileName}:#{row.trace.lineNumber}"
-        puts ""
-        puts ""
-      end
-    end
-
-  protected
-
-    def run
-      session.visit(url)
-      @results = session.evaluate_script('jasmine.results')
-    end
-
-    def has_run?
-      @results
-    end
-
-    def session
-      @session ||= Capybara::Session.new(:envjs, Evergreen.applications(root))
-    end
   end
 end
