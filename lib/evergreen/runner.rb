@@ -2,19 +2,19 @@ module Evergreen
   class Runner
     attr_reader :spec
 
-    def self.run(root)
+    def self.run(root, io=STDOUT)
       runners = Spec.all(root).map { |spec| new(spec) }
       runners.each do |runner|
         if runner.passed?
-          print '.'
+          io.print '.'
         else
-          print 'F'
+          io.print 'F'
         end
       end
-      puts ""
+      io.puts ""
 
       runners.each do |runner|
-        puts runner.failure_message unless runner.passed?
+        io.puts runner.failure_message unless runner.passed?
       end
     end
 
@@ -26,10 +26,6 @@ module Evergreen
       failed_examples.empty?
     end
 
-    def failed_examples
-      results.select { |row| !row.passed }
-    end
-
     def failure_message
       failed_examples.map do |row|
         <<-ERROR
@@ -38,6 +34,12 @@ module Evergreen
       in #{row.trace.fileName}:#{row.trace.lineNumber}
         ERROR
       end.join("\n\n")
+    end
+
+  protected
+
+    def failed_examples
+      results.select { |row| !row.passed }
     end
 
     def results

@@ -21,6 +21,7 @@ module Evergreen
     def read
       File.read(path)
     end
+    alias_method :contents, :read
 
     def url
       "/run/#{name}"

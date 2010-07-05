@@ -1,1 +1,2 @@
 require 'evergreen'
+require 'rspec'
