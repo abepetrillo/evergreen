@@ -13,22 +13,7 @@
       (function() {
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.addReporter(new jasmine.TrivialReporter());
-        jasmineEnv.addReporter({
-          reportRunnerStarting: function(runner) {
-            jasmine.results = []
-          }, 
-          reportSpecResults: function(spec) {
-            var results = spec.results();
-            var item = results.getItems()[0] || {};
-            jasmine.results.push({
-              name: spec.getFullName(),
-              passed: results.failedCount === 0,
-              message: item.message,
-              trace: item.trace
-            });
-          }
-        });
-
+        jasmineEnv.addReporter(new jasmine.ReflectiveReporter());
         jasmineEnv.execute();
       })();
     </script>
