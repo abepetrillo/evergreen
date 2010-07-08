@@ -22,6 +22,10 @@ module Evergreen
       @spec = spec
     end
 
+    def name
+      spec.name
+    end
+
     def passed?
       failed_examples.empty?
     end
