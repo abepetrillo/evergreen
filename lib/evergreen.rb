@@ -40,12 +40,12 @@ module Evergreen
             erb :list
           end
 
-          get '/run/:name' do |name|
+          get '/run/*' do |name|
             @spec = Spec.new(root, name)
             erb :spec
           end
 
-          get '/spec/:name.js' do |name|
+          get '/spec/*' do |name|
             Spec.new(root, name).read
           end
         end

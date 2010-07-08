@@ -3,7 +3,7 @@ module Evergreen
 
     def self.all(root)
       Dir.glob(File.join(root, 'spec/javascripts', '*_spec.js')).map do |path|
-        new(root, File.basename(path).sub(/_spec\.js$/, ''))
+        new(root, File.basename(path))
       end
     end
 
@@ -14,12 +14,12 @@ module Evergreen
       @name = name
     end
 
-    def path
-      File.join(root, 'spec/javascripts', name + '_spec.js')
+    def full_path
+      File.join(root, 'spec/javascripts', name)
     end
 
     def read
-      File.read(path)
+      File.read(full_path)
     end
     alias_method :contents, :read
 

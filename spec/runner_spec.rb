@@ -4,7 +4,7 @@ describe Evergreen::Runner do
   let(:root) { File.expand_path('fixtures', File.dirname(__FILE__)) }
 
   context "with passing spec" do
-    let(:spec) { Evergreen::Spec.new(root, 'testing') }
+    let(:spec) { Evergreen::Spec.new(root, 'testing_spec.js') }
     subject { Evergreen::Runner.new(spec) }
 
     it { should be_passed }
@@ -13,7 +13,7 @@ describe Evergreen::Runner do
   end
 
   context "with failing spec" do
-    let(:spec) { Evergreen::Spec.new(root, 'failing') }
+    let(:spec) { Evergreen::Spec.new(root, 'failing_spec.js') }
     subject { Evergreen::Runner.new(spec) }
 
     it { should_not be_passed }
