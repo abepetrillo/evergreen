@@ -1,4 +1,102 @@
-Evergreen
-=========
+= Evergreen
 
-Evergreen glues together some pieces to simplify JavaScript unit testing in Rails3 applications.
+> Because green is the new Blue(Ridge)
+
+Evergreen is a tool to run javascript unit tests for client side JavaScript. It combines a runner which allows you to serve up and run your specs in a browser, as well as a headless runner based on envjs. Evergreen uses the Jasmine unit testing framework for JavaScript.
+
+http://github.com/jnicklas/evergreen
+
+== Philosophy
+
+Evergreen is a unit testing tool. It's purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
+
+== Installation
+
+Install as a Ruby gem:
+
+    gem install evergreen
+
+== Usage
+
+Evergreen assumes a file and directory structure, place all your javascript code inside ./public and all spec files inside ./spec/javascripts. All spec files should end in _spec.js. For example:
+
+    public/widget.js
+    spec/javascripts/widget_spec.js
+
+You can require files from the public directory inside your spec file:
+
+    require('/widget.js')
+
+    describe('a widget', function() {
+      ...
+    });
+
+You can now look at your spec files inside a browser by starting up the Evergreen server:
+
+    evergreen server
+
+Alternatively you can run the specs headlessly by running:
+
+    evergreen run
+
+
+== Integrating with Rails 3
+
+Add Evergreen to your Gemfile:
+
+    gem 'evergreen', :require => 'evergreen/rails'
+
+Now add this line to your routes.rb file:
+
+    mount Evergreen.rails, :at => '/evergreen'
+
+Start your rails application and navigate to /evergreen. You should now see a list of all spec files, click on one to run it.
+
+== Transactions
+
+One problem often faced when writing unit tests for client side code is that changes to the page are not reverted for the next example, so that successive examples become dependent on each other. Evergreen adds a special div to your page with an id of test. This div is automatically emptied before each example. You should avoid appending markup to the page body and instead append it to this test div:
+
+    describe('transactions', function() {
+      it("should add stuff in one test...", function() {
+        $('#test').append('<h1 id="added">New Stuff</h1>');
+        expect($('#test h1#added').length).toEqual(1);
+      });
+
+      it("... should have been removed before the next starts", function() {
+        expect($('#test h1#added').length).toEqual(0);
+      });
+    });
+
+== Templates
+
+Even more powerful than that, Evergreen allows you to create HTML templates to go along with your specs. Simply name the template the same as the spec, only with an html extension. For example:
+
+      spec/javascripts/widget_spec.js
+      spec/javascripts/widget_spec.html
+
+The template will be placed inside the test div, so that means it should not include html, head, body or similar tags. The template will be restored for each example, so that at the start of each example, the markup inside the test div is identical.
+
+== License:
+
+(The MIT License)
+
+Copyright (c) 2009 Jonas Nicklas
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
