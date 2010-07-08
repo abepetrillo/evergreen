@@ -2,17 +2,22 @@ require('/jquery.js');
 
 describe('templates', function() {
 
-  describe('with no templates', function() {
+  it("should append the template to the test div", function() {
+    expect($('#test h1#from-template').length).toEqual(1);
+  });
 
-    it("should add stuff in one test...", function() {
-      $('#test').append('<h1 id="added">New Stuff</h1>');
-      expect($('#test h1#added').length).toEqual(1);
-    });
+  it("should change stuff in one test...", function() {
+    expect($('#test h1#from-template').length).toEqual(1);
 
-    it("... should have been removed before the next starts", function() {
-      expect($('#test h1#added').length).toEqual(0);
-    });
+    $('#test h1#from-template').attr('id', 'changed');
 
+    expect($('#test h1#changed').length).toEqual(1);
+    expect($('#test h1#from-template').length).toEqual(0);
+  });
+
+  it("... should have been removed before the next starts", function() {
+    expect($('#test h1#changed').length).toEqual(0);
+    expect($('#test h1#from-template').length).toEqual(1);
   });
 
 });

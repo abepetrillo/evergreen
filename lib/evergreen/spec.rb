@@ -18,6 +18,14 @@ module Evergreen
       File.join(root, 'spec/javascripts', name)
     end
 
+    def template_path
+      full_path.sub(/\..+$/, '.html')
+    end
+
+    def template
+      if File.exist?(template_path) then File.read(template_path) else "" end
+    end
+
     def read
       File.read(full_path)
     end

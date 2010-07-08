@@ -32,11 +32,11 @@ module Evergreen
 
     def failure_message
       failed_examples.map do |row|
-        <<-ERROR
-  Failed: #{row.name}
-      #{row.message}
-      in #{row.trace.fileName}:#{row.trace.lineNumber}
-        ERROR
+        msg = []
+        msg << "  Failed: #{row.name}"
+        msg << "    #{row.message}"
+        msg << "    in #{row.trace.fileName}:#{row.trace.lineNumber}" if row.trace.respond_to?(:fileName)
+        msg.join("\n")
       end.join("\n\n")
     end
 

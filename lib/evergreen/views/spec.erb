@@ -13,9 +13,10 @@
     </div>
     <script type="text/javascript">
       (function() {
+        Evergreen.template = <%= @spec.template.to_json %>;
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.addReporter(new jasmine.TrivialReporter());
-        jasmineEnv.addReporter(new jasmine.ReflectiveReporter());
+        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
         jasmineEnv.execute();
       })();
     </script>

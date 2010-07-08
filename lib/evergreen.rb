@@ -5,6 +5,7 @@ require 'capybara/envjs'
 require 'capybara/wait_until'
 require 'launchy'
 require 'evergreen/version'
+require 'json'
 
 module Evergreen
   autoload :Cli, 'evergreen/cli'
