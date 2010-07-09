@@ -76,6 +76,10 @@ Even more powerful than that, Evergreen allows you to create HTML templates to g
 
 The template will be placed inside the test div, so that means it should not include html, head, body or similar tags. The template will be restored for each example, so that at the start of each example, the markup inside the test div is identical.
 
+== CoffeeScript
+
+Evergreen supports specs written in {CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your spec file _spec.coffee and it will automatically be translated for you.
+
 == License:
 
 (The MIT License)
