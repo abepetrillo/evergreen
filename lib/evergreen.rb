@@ -43,6 +43,8 @@ module Evergreen
 
           get '/run/*' do |name|
             @spec = Spec.new(root, name)
+            @js_spec_helper = Spec.new(root, 'spec_helper.js')
+            @coffee_spec_helper = Spec.new(root, 'spec_helper.coffee')
             erb :spec
           end
 

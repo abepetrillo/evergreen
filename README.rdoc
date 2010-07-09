@@ -71,14 +71,29 @@ One problem often faced when writing unit tests for client side code is that cha
 
 Even more powerful than that, Evergreen allows you to create HTML templates to go along with your specs. Simply name the template the same as the spec, only with an html extension. For example:
 
-      spec/javascripts/widget_spec.js
-      spec/javascripts/widget_spec.html
+    spec/javascripts/widget_spec.js
+    spec/javascripts/widget_spec.html
 
 The template will be placed inside the test div, so that means it should not include html, head, body or similar tags. The template will be restored for each example, so that at the start of each example, the markup inside the test div is identical.
+
+== Spec Helper
+
+If you add a spec_helper file like so:
+
+    spec/javascripts/spec_helper.js
+
+It will automatically be loaded. This is a great place for adding custom matchers and the like.
 
 == CoffeeScript
 
 Evergreen supports specs written in {CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your spec file _spec.coffee and it will automatically be translated for you.
+
+You can also add a CoffeeScript spec helper, but remember that CoffeeScript encloses individual files in a closure, if you need something you define in the spec helper to be available in your spec files, attach it to the window object:
+
+    # spec/javascripts/spec_helper.coffee
+
+    MyThing: "foo"          # local to spec helper
+    window.MyThing: "foo"   # global
 
 == License:
 

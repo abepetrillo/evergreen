@@ -9,6 +9,11 @@ describe Evergreen::Runner do
     it { should pass }
   end
 
+  context "with spec helper" do
+    let(:spec) { Evergreen::Spec.new(root, 'with_helper_spec.js') }
+    it { should pass }
+  end
+
   context "with template spec" do
     let(:spec) { Evergreen::Spec.new(root, 'templates_spec.js') }
     it { should pass }

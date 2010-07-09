@@ -1,0 +1,1 @@
+var SpecHelper = { spec: 'helper' };

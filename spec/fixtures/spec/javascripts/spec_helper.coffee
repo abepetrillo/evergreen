@@ -1,0 +1,1 @@
+window.CoffeeSpecHelper: { coffee: 'script' }

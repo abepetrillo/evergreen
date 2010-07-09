@@ -33,4 +33,13 @@ describe Evergreen::Spec do
     its(:template) { should == '' }
   end
 
+  context "with existing spec file" do
+    it { should exist }
+  end
+
+  context "with missing spec file" do
+    subject { Evergreen::Spec.new(root, 'does_not_exist.js') }
+    it { should_not exist }
+  end
+
 end

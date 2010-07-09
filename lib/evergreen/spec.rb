@@ -39,5 +39,9 @@ module Evergreen
       "/run/#{name}"
     end
 
+    def exist?
+      File.exist?(full_path)
+    end
+
   end
 end
