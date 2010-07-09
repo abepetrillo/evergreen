@@ -16,6 +16,7 @@ module Evergreen
       runners.each do |runner|
         io.puts runner.failure_message unless runner.passed?
       end
+      runners.all? { |runner| runner.passed? }
     end
 
     def initialize(spec)

@@ -1,9 +1,8 @@
 require 'evergreen'
+require 'rails'
 
 module Evergreen
-  class << self
-    def rails
-      application(Rails.root)
-    end
+  class Railtie < Rails::Engine
   end
 end
+

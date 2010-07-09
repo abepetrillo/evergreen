@@ -1,6 +1,6 @@
 = Evergreen
 
-> Because green is the new Blue(Ridge)
+"Because green is the new Blue(Ridge)"
 
 Evergreen is a tool to run javascript unit tests for client side JavaScript. It combines a runner which allows you to serve up and run your specs in a browser, as well as a headless runner based on envjs. Evergreen uses the Jasmine unit testing framework for JavaScript.
 
@@ -46,11 +46,11 @@ Add Evergreen to your Gemfile:
 
     gem 'evergreen', :require => 'evergreen/rails'
 
-Now add this line to your routes.rb file:
+Start your rails application and navigate to /evergreen/list. You should now see a list of all spec files, click on one to run it.
 
-    mount Evergreen.rails, :at => '/evergreen'
+There's a rake task provided for you that you can use to run your specs:
 
-Start your rails application and navigate to /evergreen. You should now see a list of all spec files, click on one to run it.
+    rake spec:javascripts
 
 == Transactions
 
