@@ -13,10 +13,48 @@
     <% if @coffee_spec_helper.exist? %>
       <script type="text/javascript" src="<%= url("/spec/#{@coffee_spec_helper.name}") %>"></script>
     <% end %>
+    <style>
+      body {
+        font-family: 'Lucida grande', 'sans-serif';
+        background: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #00A500;
+      }
+
+      .jasmine_reporter {
+        width: 800px;
+        background: white;
+        padding: 20px;
+        min-height: 50px;
+        margin: 30px auto 30px;
+        border: 1px solid #ddd;
+        -moz-border-radius: 3px;
+        width: 800px;
+      }
+      #test {
+        width: 800px;
+        background: white;
+        -moz-border-radius: 3px;
+        padding: 20px;
+        min-height: 50px;
+        margin: 50px auto 30px;
+        border: 1px solid #ddd
+      }
+      #footer {
+        margin: 0 auto 30px;
+        width: 600px;
+        text-align: center;
+        font-size: 13px;
+        color: #aaa;
+      }
+    </style>
   </head>
   <body>
-    <div id="test">
-    </div>
+      <div id="test">
+      </div>
     <script type="text/javascript">
       (function() {
         Evergreen.template = <%= @spec.template.to_json %>;
@@ -26,5 +64,9 @@
         jasmineEnv.execute();
       })();
     </script>
+    <div id="footer">
+      Powered by <a href="http://github.com/jnicklas/evergreen">Evergreen</a>.
+      Evergreen is sponsored by <a href="http://elabs.se">Elabs</a>.
+    </div>
   </body>
 </html>

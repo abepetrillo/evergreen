@@ -1,6 +1,67 @@
-<h1>Evergreen</h1>
+<!doctype html>
 
-<% @specs.each do |spec| %>
-  <p><a href="<%= url(spec.url) %>"><%= spec.name %></a></p>
-<% end %>
+<html>
+  <head>
+    <title>Evergreen</title>
+    <style type="text/css">
+      * { margin: 0; padding: 0; }
+      body {
+        font-family: 'Lucida grande', 'sans-serif';
+        background: #f0f0f0;
+      }
+      a {
+        color: #00A500;
+      }
 
+      #page {
+        width: 800px;
+        background: white;
+        -moz-border-radius: 3px;
+        padding: 20px;
+        margin: 50px auto 30px;
+        border: 1px solid #ddd
+      }
+
+      #page h1 {
+        margin: 0 0 30px;
+      }
+
+      #page ul li {
+        list-style: none;
+        border: 1px solid #ddd;
+        -moz-border-radius: 3px;
+        margin: 10px 0;
+        background: #f5f5f5;
+      }
+
+      #page ul li a {
+        padding: 7px 10px;
+        display: block;
+        text-decoration: none;
+      }
+
+      #footer {
+        margin: 0 auto 30px;
+        width: 600px;
+        text-align: center;
+        font-size: 13px;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page">
+      <h1>Evergreen</h1>
+
+      <ul id="specs">
+        <% @specs.each do |spec| %>
+          <li><a href="<%= url(spec.url) %>"><%= spec.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="footer">
+      Powered by <a href="http://github.com/jnicklas/evergreen">Evergreen</a>.
+      Evergreen is sponsored by <a href="http://elabs.se">Elabs</a>.
+    </div>
+  </body>
+</html>
