@@ -34,9 +34,9 @@ module Evergreen
     def failure_message
       failed_examples.map do |row|
         msg = []
-        msg << "  Failed: #{row.name}"
-        msg << "    #{row.message}"
-        msg << "    in #{row.trace.fileName}:#{row.trace.lineNumber}" if row.trace.respond_to?(:fileName)
+        msg << "  Failed: #{row['name']}"
+        msg << "    #{row['message']}"
+        msg << "    in #{row['trace']['fileName']}:#{row['trace']['lineNumber']}" if row['trace']
         msg.join("\n")
       end.join("\n\n")
     end
@@ -44,14 +44,14 @@ module Evergreen
   protected
 
     def failed_examples
-      results.select { |row| !row.passed }
+      results.select { |row| !row['passed'] }
     end
 
     def results
       @results ||= begin
         session = Capybara::Session.new(:envjs, Evergreen.application(spec.root))
         session.visit(spec.url)
-        session.evaluate_script('jasmine.results')
+        JSON.parse(session.evaluate_script('Evergreen.getResults()'))
       end
     end
 
