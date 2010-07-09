@@ -15,7 +15,7 @@ describe Evergreen::Spec do
     subject { Evergreen::Spec.all(root) }
 
     it "should find all specs in the given root directory" do
-      subject.map(&:name).should include('testing_spec.js', 'foo_spec.js', 'bar_spec.js')
+      subject.map(&:name).should include('testing_spec.js', 'foo_spec.js', 'bar_spec.js', 'coffeescript_spec.coffee')
     end
   end
 
@@ -24,7 +24,13 @@ describe Evergreen::Spec do
     its(:template) { should == %(<h1 id="from-template">This is from the template</h1>\n) }
   end
 
+  context "with coffeescript" do
+    subject { Evergreen::Spec.new(root, 'coffeescript_spec.coffee') }
+    its(:contents) { should =~ /describe\('coffeescript', function/ }
+  end
+
   context "without a template" do
     its(:template) { should == '' }
   end
+
 end
