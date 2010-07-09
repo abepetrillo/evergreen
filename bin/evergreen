@@ -6,8 +6,8 @@ require 'evergreen'
 
 begin
   # The dup is to keep ARGV intact, so that tools like ruby-debug can respawn.
-  failure = Evergreen::Cli.execute(ARGV.dup)
-  Kernel.exit(failure ? 1 : 0)
+  success = Evergreen::Cli.execute(ARGV.dup)
+  Kernel.exit(success ? 0 : 1)
 rescue SystemExit => e
   Kernel.exit(e.status)
 rescue Exception => e
