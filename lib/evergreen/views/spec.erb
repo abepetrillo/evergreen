@@ -6,13 +6,13 @@
     <script type="text/javascript" src="<%= url("/lib/jasmine.js") %>"></script>
     <script type="text/javascript" src="<%= url("/lib/jasmine-html.js") %>"></script>
     <script type="text/javascript" src="<%= url("/evergreen/evergreen.js") %>"></script>
-    <script type="text/javascript" src="<%= url("/spec/#{@spec.name}") %>"></script>
     <% if @js_spec_helper.exist? %>
       <script type="text/javascript" src="<%= url("/spec/#{@js_spec_helper.name}") %>"></script>
     <% end %>
     <% if @coffee_spec_helper.exist? %>
       <script type="text/javascript" src="<%= url("/spec/#{@coffee_spec_helper.name}") %>"></script>
     <% end %>
+    <script type="text/javascript" src="<%= url("/spec/#{@spec.name}") %>"></script>
     <style>
       body {
         font-family: 'Lucida grande', 'sans-serif';
