@@ -2,10 +2,10 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="<%= url('/lib/jasmine.css') %>">
-    <script type="text/javascript" src="<%= url("/lib/jasmine.js") %>"></script>
-    <script type="text/javascript" src="<%= url("/lib/jasmine-html.js") %>"></script>
-    <script type="text/javascript" src="<%= url("/evergreen/evergreen.js") %>"></script>
+    <link rel="stylesheet" type="text/css" href="<%= url('/jasmine/jasmine.css') %>">
+    <script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
+    <script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
+    <script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
     <% if @js_spec_helper.exist? %>
       <script type="text/javascript" src="<%= url("/spec/#{@js_spec_helper.name}") %>"></script>
     <% end %>
@@ -53,8 +53,8 @@
     </style>
   </head>
   <body>
-      <div id="test">
-      </div>
+    <div id="test">
+    </div>
     <script type="text/javascript">
       (function() {
         Evergreen.driver = <%= @driver.to_json %>;
