@@ -3,7 +3,7 @@ require 'rspec'
 
 require 'capybara/dsl'
 
-Capybara.app = Evergreen.application(File.expand_path('fixtures', File.dirname(__FILE__)))
+Capybara.app = Evergreen.application(File.expand_path('suite1', File.dirname(__FILE__)))
 Capybara.default_driver = :selenium
 
 module EvergreenMatchers

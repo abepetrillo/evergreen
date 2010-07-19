@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Evergreen::Spec do
-  let(:root) { File.expand_path('fixtures', File.dirname(__FILE__)) }
+  let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
   subject { Evergreen::Spec.new(root, 'testing_spec.js') }
 
   its(:name) { should == 'testing_spec.js' }
