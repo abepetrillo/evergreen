@@ -1,4 +1,5 @@
 require('/jquery.js');
+stylesheet('/styles.css')
 
 describe('templates', function() {
 
@@ -20,4 +21,13 @@ describe('templates', function() {
     expect($('#test h1#from-template').length).toEqual(1);
   });
 
+});
+
+describe('stylesheet', function() {
+  it("should style the template", function() {
+    // Env-js does not have support for stylesheets
+    if (Evergreen.driver != "envjs") {
+      expect(document.getElementById('from-template').offsetWidth).toEqual(300)
+    }
+  });
 });

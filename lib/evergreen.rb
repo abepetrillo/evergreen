@@ -14,9 +14,9 @@ module Evergreen
   autoload :Spec, 'evergreen/spec'
 
   class << self
-    def application(root)
+    def application(root, driver=:serve)
       Class.new(Sinatra::Base).tap do |app|
-        app.reset! 
+        app.reset!
         app.class_eval do
           set :static, true
           set :root, File.expand_path('evergreen', File.dirname(__FILE__))
@@ -45,6 +45,7 @@ module Evergreen
             @spec = Spec.new(root, name)
             @js_spec_helper = Spec.new(root, 'spec_helper.js')
             @coffee_spec_helper = Spec.new(root, 'spec_helper.coffee')
+            @driver = driver
             erb :spec
           end
 

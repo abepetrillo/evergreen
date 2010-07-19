@@ -57,6 +57,7 @@
       </div>
     <script type="text/javascript">
       (function() {
+        Evergreen.driver = <%= @driver.to_json %>;
         Evergreen.template = <%= @spec.template.to_json %>;
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.addReporter(new jasmine.TrivialReporter());
