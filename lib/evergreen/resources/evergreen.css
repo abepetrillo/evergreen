@@ -1,0 +1,62 @@
+body {
+  font-family: 'Lucida grande', 'sans-serif';
+  background: #f0f0f0;
+}
+
+a {
+  color: #00A500;
+}
+
+#page, #test, .jasmine_reporter {
+  width: 800px;
+  background: white;
+  -moz-border-radius: 3px;
+  padding: 20px;
+  margin: 50px auto 30px;
+  border: 1px solid #ddd
+}
+
+#test {
+  min-height: 50px;
+  margin: 30px auto 30px;
+}
+
+.jasmine_reporter {
+  margin: 30px auto 30px;
+}
+
+#page h1 {
+  font-size: 24px;
+  margin: 0 0 15px;
+}
+
+#page a.back {
+  font-size: 12px;
+}
+
+#page ul {
+  margin: 0;
+  padding: 0;
+}
+
+#page ul li {
+  list-style: none;
+  border: 1px solid #ddd;
+  -moz-border-radius: 3px;
+  margin: 10px 0;
+  background: #f5f5f5;
+}
+
+#page ul li a {
+  padding: 7px 10px;
+  display: block;
+  text-decoration: none;
+}
+
+#footer {
+  margin: 0 auto 30px;
+  width: 600px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
