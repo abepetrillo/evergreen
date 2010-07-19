@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.summary = "Run Jasmine JavaScript unit tests, integrate them into Ruby applications."
 
   s.add_runtime_dependency("capybara", [">= 0.3.9"])
-  s.add_runtime_dependency("capybara-envjs", [">= 0.1.5"])
   s.add_runtime_dependency("launchy", [">= 0.3.5"])
   s.add_runtime_dependency("sinatra", [">= 1.0"])
   s.add_runtime_dependency("json", [">= 1.0.0"])

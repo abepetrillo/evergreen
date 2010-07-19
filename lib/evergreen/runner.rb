@@ -49,7 +49,7 @@ module Evergreen
 
     def results
       @results ||= begin
-        session = Capybara::Session.new(:envjs, Evergreen.application(spec.root, :envjs))
+        session = Capybara::Session.new(:selenium, Evergreen.application(spec.root, :selenium))
         session.visit(spec.url)
         JSON.parse(session.evaluate_script('Evergreen.getResults()'))
       end

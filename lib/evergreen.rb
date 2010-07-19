@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'capybara'
-require 'capybara/envjs'
 require 'capybara/wait_until'
 require 'launchy'
 require 'evergreen/version'
