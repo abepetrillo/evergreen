@@ -11,6 +11,7 @@ module Evergreen
   autoload :Server, 'evergreen/server'
   autoload :Runner, 'evergreen/runner'
   autoload :Spec, 'evergreen/spec'
+  autoload :Template, 'evergreen/template'
 
   class << self
     def application(root, driver=:serve)

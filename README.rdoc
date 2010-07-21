@@ -69,12 +69,20 @@ One problem often faced when writing unit tests for client side code is that cha
 
 == Templates
 
-Even more powerful than that, Evergreen allows you to create HTML templates to go along with your specs. Simply name the template the same as the spec, only with an html extension. For example:
+Even more powerful than that, Evergreen allows you to create HTML templates to go along with your specs. Put the templates in their own folder like this:
 
-    spec/javascripts/widget_spec.js
-    spec/javascripts/widget_spec.html
+    spec/javascripts/templates/one_template.html
+    spec/javascripts/templates/another_template.html
 
-The template will be placed inside the test div, so that means it should not include html, head, body or similar tags. The template will be restored for each example, so that at the start of each example, the markup inside the test div is identical.
+You can then load the template into the test div, by calling the template function in your specs:
+
+    describe('transactions', function() {
+      template('one_template.html')
+
+      it("should load the template in this test", function() {
+        ...
+      });
+    });
 
 == Spec Helper
 

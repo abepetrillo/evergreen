@@ -7,7 +7,6 @@ describe Evergreen::Spec do
   its(:name) { should == 'testing_spec.js' }
   its(:root) { should == root }
   its(:full_path) { should == "#{root}/spec/javascripts/testing_spec.js" }
-  its(:template_path) { should == "#{root}/spec/javascripts/testing_spec.html" }
   its(:url) { should == "/run/testing_spec.js" }
   its(:contents) { should =~ /describe\('testing'/ }
 
@@ -19,18 +18,9 @@ describe Evergreen::Spec do
     end
   end
 
-  context "with a template" do
-    subject { Evergreen::Spec.new(root, 'templates_spec.js') }
-    its(:template) { should == %(<h1 id="from-template">This is from the template</h1>\n) }
-  end
-
   context "with coffeescript" do
     subject { Evergreen::Spec.new(root, 'coffeescript_spec.coffee') }
     its(:contents) { should =~ /describe\('coffeescript', function/ }
-  end
-
-  context "without a template" do
-    its(:template) { should == '' }
   end
 
   context "with existing spec file" do

@@ -18,14 +18,6 @@ module Evergreen
       File.join(root, 'spec/javascripts', name)
     end
 
-    def template_path
-      full_path.sub(/\..+$/, '.html')
-    end
-
-    def template
-      if File.exist?(template_path) then File.read(template_path) else "" end
-    end
-
     def read
       if full_path =~ /\.coffee$/
         %x(coffee -p #{full_path})
@@ -41,6 +33,10 @@ module Evergreen
 
     def exist?
       File.exist?(full_path)
+    end
+
+    def templates
+      Evergreen::Template.all(root)
     end
 
   end
