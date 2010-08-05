@@ -33,7 +33,7 @@ You can require files from the public directory inside your spec file:
 
 You can now look at your spec files inside a browser by starting up the Evergreen server:
 
-    evergreen server
+    evergreen serve
 
 Alternatively you can run the specs headlessly by running:
 
