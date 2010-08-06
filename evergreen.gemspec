@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("capybara", [">= 0.3.9"])
   s.add_runtime_dependency("launchy", [">= 0.3.5"])
   s.add_runtime_dependency("sinatra", [">= 1.0"])
-  s.add_runtime_dependency("json", [">= 1.0.0"])
+  s.add_runtime_dependency("json_pure", [">= 1.0.0"])
 
   s.add_development_dependency('rspec', ['>= 2.0.0.beta.15'])
 end
