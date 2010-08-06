@@ -51,6 +51,7 @@ module Evergreen
       @results ||= begin
         session = Capybara::Session.new(:selenium, Evergreen.application(spec.root, :selenium))
         session.visit(spec.url)
+        session.wait_until(180) { session.evaluate_script('Evergreen.done') }
         JSON.parse(session.evaluate_script('Evergreen.getResults()'))
       end
     end
