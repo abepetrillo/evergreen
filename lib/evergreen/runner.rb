@@ -58,7 +58,3 @@ module Evergreen
 
   end
 end
-
-
-
-
