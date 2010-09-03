@@ -3,15 +3,20 @@ module Evergreen
     attr_reader :spec
 
     def self.run(root, io=STDOUT)
+      io.puts "Started"
+      passed, failed = 0, 0
       runners = Spec.all(root).map { |spec| new(spec) }
       runners.each do |runner|
         if runner.passed?
           io.print '.'
+          passed += 1
         else
           io.print 'F'
+          failed += 1
         end
       end
       io.puts ""
+      io.puts "#{passed + failed} specs, #{passed} successes, #{failed} failures"
 
       runners.each do |runner|
         io.puts runner.failure_message unless runner.passed?
