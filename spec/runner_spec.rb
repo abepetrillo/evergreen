@@ -13,6 +13,7 @@ describe Evergreen::Runner do
 
       it { should include('.F..') }
       it { should include("Expected 'bar' to equal 'noooooo'") }
+      it { should include("16 examples, 2 failures") }
     end
   end
 
@@ -25,6 +26,7 @@ describe Evergreen::Runner do
 
       it { should include('.F') }
       it { should include("Expected 'bar' to equal 'noooooo'") }
+      it { should include("2 examples, 1 failures") }
     end
   end
 end

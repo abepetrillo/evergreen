@@ -43,6 +43,7 @@ module Evergreen
       def run
         io.puts dots
         io.puts failure_messages
+        io.puts "\n#{examples.size} examples, #{failed_examples.size} failures"
         passed?
       end
 
@@ -54,6 +55,10 @@ module Evergreen
             Example.new(row)
           end
         end
+      end
+
+      def failed_examples
+        examples.select { |example| not example.passed? }
       end
 
       def passed?
@@ -86,11 +91,16 @@ module Evergreen
     def run
       io.puts dots
       io.puts failure_messages
+      io.puts "\n#{examples.size} examples, #{failed_examples.size} failures"
       passed?
     end
 
     def examples
       spec_runners.map { |spec_runner| spec_runner.examples }.flatten
+    end
+
+    def failed_examples
+      examples.select { |example| not example.passed? }
     end
 
     def passed?
