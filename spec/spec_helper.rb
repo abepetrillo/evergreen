@@ -6,7 +6,7 @@ require 'rspec'
 
 require 'capybara/dsl'
 
-Capybara.app = Evergreen.application(File.expand_path('suite1', File.dirname(__FILE__)))
+Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
 Capybara.default_driver = :selenium
 
 module EvergreenMatchers
@@ -17,7 +17,7 @@ module EvergreenMatchers
     end
 
     def failure_message
-      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.failure_message}"
+      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.message}"
     end
 
     def negative_failure_message

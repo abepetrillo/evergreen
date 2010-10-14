@@ -1,60 +1,72 @@
 module Evergreen
   class Runner
-    attr_reader :spec
+    class Example
+      def initialize(row)
+        @row = row
+      end
 
-    def self.run(root, io=STDOUT)
-      runners = Spec.all(root).map { |spec| new(spec) }
-      runners.each do |runner|
-        if runner.passed?
-          io.print '.'
-        else
-          io.print 'F'
+      def passed?
+        @row['passed']
+      end
+
+      def message
+        unless passed?
+          msg = []
+          msg << "  Failed: #{@row['name']}"
+          msg << "    #{@row['message']}"
+          msg << "    in #{@row['trace']['fileName']}:#{@row['trace']['lineNumber']}" if @row['trace']
+          msg.join("\n")
         end
       end
-      io.puts ""
+    end
 
-      runners.each do |runner|
-        io.puts runner.failure_message unless runner.passed?
+    attr_reader :suite
+
+    def initialize(suite)
+      @suite = suite
+      @spec_results = {}
+    end
+
+    def run_spec(spec, io=STDOUT)
+      io.puts dots(spec_results(spec))
+      io.puts messages(spec_results(spec))
+      spec_results(spec).all? { |example| example.passed? }
+    end
+
+    def run(io=STDOUT)
+      io.puts dots(results)
+      io.puts messages(results)
+      results.all? { |example| example.passed? }
+    end
+
+    def results
+      @results ||= suite.specs.map do |spec|
+        spec_results(spec)
+      end.flatten
+    end
+
+    def spec_results(spec)
+      @spec_results[spec] ||= begin
+        session.visit(spec.url)
+        session.wait_until(180) { session.evaluate_script('Evergreen.done') }
+        JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
+          Example.new(row)
+        end
       end
-      runners.all? { |runner| runner.passed? }
     end
 
-    def initialize(spec)
-      @spec = spec
-    end
-
-    def name
-      spec.name
-    end
-
-    def passed?
-      failed_examples.empty?
-    end
-
-    def failure_message
-      failed_examples.map do |row|
-        msg = []
-        msg << "  Failed: #{row['name']}"
-        msg << "    #{row['message']}"
-        msg << "    in #{row['trace']['fileName']}:#{row['trace']['lineNumber']}" if row['trace']
-        msg.join("\n")
-      end.join("\n\n")
+    def session
+      @session ||= Capybara::Session.new(suite.driver, suite.application)
     end
 
   protected
 
-    def failed_examples
-      results.select { |row| !row['passed'] }
+    def messages(examples)
+      examples.map { |e| e.message }.join("\n\n")
     end
 
-    def results
-      @results ||= begin
-        session = Capybara::Session.new(:selenium, Evergreen.application(spec.root, :selenium))
-        session.visit(spec.url)
-        session.wait_until(180) { session.evaluate_script('Evergreen.done') }
-        JSON.parse(session.evaluate_script('Evergreen.getResults()'))
-      end
+    def dots(examples)
+      examples.map { |example| if example.passed? then '.' else 'F' end }.join
     end
-
   end
 end

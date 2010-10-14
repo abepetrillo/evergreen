@@ -19,7 +19,7 @@
 <script type="text/javascript">
   (function() {
     Evergreen.driver = <%= @driver.to_json %>;
-    <% @spec.templates.each do |template| %>
+    <% @suite.templates.each do |template| %>
       Evergreen.templates[<%= template.name.to_json %>] = <%= template.read.to_json %>;
     <% end %>
     var jasmineEnv = jasmine.getEnv();

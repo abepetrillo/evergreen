@@ -2,33 +2,28 @@ require 'spec_helper'
 
 describe Evergreen::Runner do
   let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
+  let(:suite) { Evergreen::Suite.new(root, :selenium) }
+  let(:buffer) { StringIO.new }
 
-  context "with passing spec" do
-    let(:spec) { Evergreen::Spec.new(root, 'testing_spec.js') }
-    subject { Evergreen::Runner.new(spec) }
-
-    it { should be_passed }
-    its(:spec) { should == spec }
-    its(:failure_message) { should be_empty }
-  end
-
-  context "with failing spec" do
-    let(:spec) { Evergreen::Spec.new(root, 'failing_spec.js') }
-    subject { Evergreen::Runner.new(spec) }
-
-    it { should_not be_passed }
-    its(:spec) { should == spec }
-    its(:failure_message) { should include("Expected 'bar' to equal 'noooooo'") }
-  end
-
-  describe '.run' do
-    let(:buffer) { StringIO.new }
-    before { Evergreen::Runner.run(root, buffer) }
+  describe '#run' do
+    before { Evergreen::Runner.new(suite).run(buffer) }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
 
       it { should include('.F..') }
+      it { should include("Expected 'bar' to equal 'noooooo'") }
+    end
+  end
+
+  describe '#run_spec' do
+    let(:spec) { suite.get_spec('failing_spec.js') }
+    before { Evergreen::Runner.new(suite).run_spec(spec, buffer) }
+
+    describe 'the buffer' do
+      subject { buffer.rewind; buffer.read }
+
+      it { should include('.F') }
       it { should include("Expected 'bar' to equal 'noooooo'") }
     end
   end

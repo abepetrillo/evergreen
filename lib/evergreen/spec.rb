@@ -1,17 +1,14 @@
 module Evergreen
   class Spec
+    attr_reader :name, :suite
 
-    def self.all(root)
-      Dir.glob(File.join(root, 'spec/javascripts', '*_spec.{js,coffee}')).map do |path|
-        new(root, File.basename(path))
-      end
+    def initialize(suite, name)
+      @suite = suite
+      @name = name
     end
 
-    attr_reader :name, :root
-
-    def initialize(root, name)
-      @root = root
-      @name = name
+    def root
+      suite.root
     end
 
     def full_path
@@ -31,13 +28,12 @@ module Evergreen
       "/run/#{name}"
     end
 
+    def passed?
+      suite.runner.spec_results(self).all? { |example| example.passed? }
+    end
+
     def exist?
       File.exist?(full_path)
     end
-
-    def templates
-      Evergreen::Template.all(root)
-    end
-
   end
 end
