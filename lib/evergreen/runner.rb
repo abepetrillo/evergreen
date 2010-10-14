@@ -65,7 +65,9 @@ module Evergreen
       end
 
       def failure_messages
-        examples.map { |example| example.failure_message }.join("\n\n")
+        unless passed?
+          examples.map { |example| example.failure_message }.compact.join("\n\n")
+        end
       end
     end
 
@@ -100,7 +102,9 @@ module Evergreen
     end
 
     def failure_messages
-      spec_runners.map { |spec_runner| spec_runner.failure_messages }.join("\n\n")
+      unless passed?
+        spec_runners.map { |spec_runner| spec_runner.failure_messages }.compact.join("\n\n")
+      end
     end
 
     def session
