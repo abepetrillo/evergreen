@@ -6,7 +6,7 @@ describe Evergreen::Runner do
   let(:buffer) { StringIO.new }
 
   describe '#run' do
-    before { Evergreen::Runner.new(suite).run(buffer) }
+    before { Evergreen::Runner.new(suite, buffer).run }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
@@ -18,7 +18,7 @@ describe Evergreen::Runner do
 
   describe '#run_spec' do
     let(:spec) { suite.get_spec('failing_spec.js') }
-    before { Evergreen::Runner.new(suite).run_spec(spec, buffer) }
+    before { Evergreen::Runner.new(suite, buffer).spec_runner(spec).run }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }

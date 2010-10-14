@@ -9,7 +9,11 @@ module Evergreen
         @row['passed']
       end
 
-      def message
+      def dot
+        if passed? then '.' else 'F' end
+      end
+
+      def failure_message
         unless passed?
           msg = []
           msg << "  Failed: #{@row['name']}"
@@ -20,39 +24,83 @@ module Evergreen
       end
     end
 
-    attr_reader :suite
+    class SpecRunner
+      attr_reader :runner, :spec
 
-    def initialize(suite)
+      def initialize(runner, spec)
+        @runner = runner
+        @spec = spec
+      end
+
+      def session
+        runner.session
+      end
+
+      def io
+        runner.io
+      end
+
+      def run
+        io.puts dots
+        io.puts failure_messages
+        passed?
+      end
+
+      def examples
+        @results ||= begin
+          session.visit(spec.url)
+          session.wait_until(180) { session.evaluate_script('Evergreen.done') }
+          JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
+            Example.new(row)
+          end
+        end
+      end
+
+      def passed?
+        examples.all? { |example| example.passed? }
+      end
+
+      def dots
+        examples.map { |example| example.dot }.join
+      end
+
+      def failure_messages
+        examples.map { |example| example.failure_message }.join("\n\n")
+      end
+    end
+
+    attr_reader :suite, :io
+
+    def initialize(suite, io=STDOUT)
+      @io = io
       @suite = suite
       @spec_results = {}
     end
 
-    def run_spec(spec, io=STDOUT)
-      io.puts dots(spec_results(spec))
-      io.puts messages(spec_results(spec))
-      spec_results(spec).all? { |example| example.passed? }
+    def spec_runner(spec)
+      SpecRunner.new(self, spec)
     end
 
-    def run(io=STDOUT)
-      io.puts dots(results)
-      io.puts messages(results)
-      results.all? { |example| example.passed? }
+    def run
+      io.puts dots
+      io.puts failure_messages
+      passed?
     end
 
-    def results
-      @results ||= suite.specs.map do |spec|
-        spec_results(spec)
-      end.flatten
+    def examples
+      spec_runners.map { |spec_runner| spec_runner.examples }.flatten
     end
 
-    def spec_results(spec)
-      @spec_results[spec] ||= begin
-        session.visit(spec.url)
-        session.wait_until(180) { session.evaluate_script('Evergreen.done') }
-        JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
-          Example.new(row)
-        end
-      end
+    def passed?
+      spec_runners.all? { |spec_runner| spec_runner.passed? }
+    end
+
+    def dots
+      spec_runners.map { |spec_runner| spec_runner.dots }.join
+    end
+
+    def failure_messages
+      spec_runners.map { |spec_runner| spec_runner.failure_messages }.join("\n\n")
     end
 
     def session
@@ -61,12 +109,8 @@ module Evergreen
 
   protected
 
-    def messages(examples)
-      examples.map { |e| e.message }.join("\n\n")
-    end
-
-    def dots(examples)
-      examples.map { |example| if example.passed? then '.' else 'F' end }.join
+    def spec_runners
+      @spec_runners ||= suite.specs.map { |spec| SpecRunner.new(self, spec) }
     end
   end
 end

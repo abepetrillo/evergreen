@@ -29,11 +29,21 @@ module Evergreen
     end
 
     def passed?
-      suite.runner.spec_results(self).all? { |example| example.passed? }
+      runner.passed?
+    end
+
+    def failure_messages
+      runner.failure_messages
     end
 
     def exist?
       File.exist?(full_path)
+    end
+
+  protected
+
+    def runner
+      @runner ||= suite.runner.spec_runner(self)
     end
   end
 end

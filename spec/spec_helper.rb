@@ -17,7 +17,7 @@ module EvergreenMatchers
     end
 
     def failure_message
-      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.message}"
+      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.failure_messages}"
     end
 
     def negative_failure_message
