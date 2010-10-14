@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Evergreen::Runner do
-  subject { Evergreen::Runner.new(spec) }
-  let(:spec) { Evergreen::Spec.new(root, template) }
+  let(:suite) { Evergreen::Suite.new(root, :selenium) }
+  subject { Evergreen::Spec.new(suite, template) }
 
   context "with standard setup" do
     let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }

@@ -1,30 +1,21 @@
 module Evergreen
   class Server
-    def self.run(root)
-      serve = new(root)
-      serve.boot
-      serve.launch_browser
+    attr_reader :suite
+
+    def initialize(suite)
+      @suite = suite
     end
 
-    def initialize(root)
-      @root = root
+    def serve
+      server.boot
+      Launchy.open(server.url('/'))
+      sleep
     end
+
+  protected
 
     def server
-      @server ||= Capybara::Server.new(Evergreen.application(@root))
-    end
-
-    def boot
-      server.boot
-    end
-
-    def root_url
-      server.url('/')
-    end
-
-    def launch_browser
-      Launchy.open(root_url)
-      sleep
+      @server ||= Capybara::Server.new(suite.application)
     end
   end
 end
