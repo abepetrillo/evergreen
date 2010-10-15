@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Evergreen::Runner do
   let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
-  let(:suite) { Evergreen::Suite.new(root, :selenium) }
+  let(:suite) { Evergreen::Suite.new(root, TEST_DRIVER) }
+  let(:runner) { Evergreen::Runner.new(suite, buffer) }
   let(:buffer) { StringIO.new }
 
   describe '#run' do
-    before { Evergreen::Runner.new(suite, buffer).run }
+    before { runner.run }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
@@ -19,7 +20,7 @@ describe Evergreen::Runner do
 
   describe '#run_spec' do
     let(:spec) { suite.get_spec('failing_spec.js') }
-    before { Evergreen::Runner.new(suite, buffer).spec_runner(spec).run }
+    before { runner.spec_runner(spec).run }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }

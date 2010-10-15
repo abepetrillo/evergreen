@@ -6,8 +6,10 @@ require 'rspec'
 
 require 'capybara/dsl'
 
+TEST_DRIVER = :selenium
+
 Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
-Capybara.default_driver = :selenium
+Capybara.default_driver = TEST_DRIVER
 
 module EvergreenMatchers
   class PassSpec # :nodoc:
