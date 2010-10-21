@@ -4,6 +4,14 @@ module Evergreen
 
     def initialize(root)
       @root = root
+
+      paths = [
+        File.expand_path("config/evergreen.rb", root),
+        File.expand_path(".evergreen", root),
+        "#{ENV["HOME"]}/.evergreen"
+      ]
+      paths.each { |path| load(path) if File.exist?(path) }
+
       @runner = Runner.new(self)
       @server = Server.new(self)
       @application = Evergreen.application(self)
