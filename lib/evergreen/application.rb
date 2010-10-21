@@ -1,5 +1,5 @@
 module Evergreen
-  def self.application(suite, driver)
+  def self.application(suite)
     Rack::Builder.new do
       map "/jasmine" do
         use Rack::Static, :urls => ["/"], :root => File.expand_path('../jasmine/lib', File.dirname(__FILE__))
@@ -40,7 +40,6 @@ module Evergreen
               @spec = suite.get_spec(name)
               @js_spec_helper = suite.get_spec('spec_helper.js')
               @coffee_spec_helper = suite.get_spec('spec_helper.coffee')
-              @driver = driver
               erb :spec
             end
 

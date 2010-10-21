@@ -14,4 +14,16 @@ module Evergreen
   autoload :Suite, 'evergreen/suite'
   autoload :Spec, 'evergreen/spec'
   autoload :Template, 'evergreen/template'
+
+  class << self
+    attr_accessor :driver
+
+    def configure
+      yield self
+    end
+  end
+end
+
+Evergreen.configure do |config|
+  config.driver = :selenium
 end

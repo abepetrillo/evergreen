@@ -10,10 +10,10 @@ module Evergreen
 
       case command
       when "serve"
-        Evergreen::Suite.new(root, :serve).serve
+        Evergreen::Suite.new(root).serve
         return true
       when "run"
-        return Evergreen::Suite.new(root, :selenium).run
+        return Evergreen::Suite.new(root).run
       else
         puts "no such command '#{command}'"
         return false

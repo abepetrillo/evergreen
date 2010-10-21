@@ -36,4 +36,7 @@ end
 
 RSpec.configure do |config|
   config.include EvergreenMatchers
+  config.before do
+    Evergreen.driver = TEST_DRIVER
+  end
 end

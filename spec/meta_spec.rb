@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Evergreen::Runner do
-  let(:suite) { Evergreen::Suite.new(root, TEST_DRIVER) }
+  let(:suite) { Evergreen::Suite.new(root) }
   subject { Evergreen::Spec.new(suite, template) }
 
   context "with standard setup" do

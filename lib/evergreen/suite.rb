@@ -2,12 +2,11 @@ module Evergreen
   class Suite
     attr_reader :root, :runner, :server, :driver, :application
 
-    def initialize(root, driver=:serve)
+    def initialize(root)
       @root = root
-      @driver = driver
       @runner = Runner.new(self)
       @server = Server.new(self)
-      @application = Evergreen.application(self, driver)
+      @application = Evergreen.application(self)
     end
 
     def run
