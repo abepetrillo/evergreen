@@ -14,7 +14,7 @@ describe Evergreen::Runner do
 
       it { should include('.F..') }
       it { should include("Expected 'bar' to equal 'noooooo'") }
-      it { should include("16 examples, 2 failures") }
+      it { should include("17 examples, 3 failures") }
     end
   end
 

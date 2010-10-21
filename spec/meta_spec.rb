@@ -22,6 +22,11 @@ describe Evergreen::Runner do
       it { should pass }
     end
 
+    context "invalid coffee" do
+      let(:template) { 'invalid_coffee_spec.coffee' }
+      it { should_not pass }
+    end
+
     context "with slow failing spec" do
       let(:template) { 'slow_spec.coffee' }
       it { should_not pass }

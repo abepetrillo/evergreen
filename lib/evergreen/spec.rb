@@ -1,5 +1,9 @@
+require 'open3'
+
 module Evergreen
   class Spec
+    class CoffeeScriptError < StandardError; end
+
     attr_reader :name, :suite
 
     def initialize(suite, name)
@@ -17,7 +21,9 @@ module Evergreen
 
     def read
       if full_path =~ /\.coffee$/
-        %x(coffee -p #{full_path})
+        stdout, stderr = Open3.popen3("coffee -p #{full_path}")[1,2].map { |b| b.read }
+        raise CoffeeScriptError, stderr unless stderr.empty?
+        stdout
       else
         File.read(full_path)
       end
