@@ -28,5 +28,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("sinatra", [">= 1.0"])
   s.add_runtime_dependency("json_pure", [">= 1.0.0"])
 
-  s.add_development_dependency('rspec', ['>= 2.0.0.beta.15'])
+  s.add_development_dependency('rspec', ['~> 2.0'])
+  s.add_development_dependency('akephalos', ['>= 0.2.4'])
+  s.add_development_dependency('capybara-envjs', ['>= 0.1.6'])
 end

@@ -10,6 +10,9 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    akephalos (0.2.4)
+      capybara (~> 0.3.8)
+      jruby-jars
     capybara (0.3.9)
       culerity (>= 0.2.4)
       mime-types (>= 1.16)
@@ -17,11 +20,19 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (>= 0.0.3)
+    capybara-envjs (0.1.6)
+      capybara (>= 0.3.9)
+      envjs (>= 0.3.7)
     configuration (1.1.0)
     culerity (0.2.10)
     diff-lcs (1.1.2)
+    envjs (0.3.8)
+      johnson (>= 2.0.0.pre3)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    johnson (2.0.0.pre3)
+      stackdeck (~> 0.2)
+    jruby-jars (1.5.3)
     json_pure (1.4.3)
     launchy (0.3.7)
       configuration (>= 0.0.5)
@@ -32,14 +43,16 @@ GEM
     rack-test (0.5.4)
       rack (>= 1.0)
     rake (0.8.7)
-    rspec (2.0.0.beta.19)
-      rspec-core (= 2.0.0.beta.19)
-      rspec-expectations (= 2.0.0.beta.19)
-      rspec-mocks (= 2.0.0.beta.19)
-    rspec-core (2.0.0.beta.19)
-    rspec-expectations (2.0.0.beta.19)
+    rspec (2.0.0)
+      rspec-core (= 2.0.0)
+      rspec-expectations (= 2.0.0)
+      rspec-mocks (= 2.0.0)
+    rspec-core (2.0.0)
+    rspec-expectations (2.0.0)
       diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.0.beta.19)
+    rspec-mocks (2.0.0)
+      rspec-core (= 2.0.0)
+      rspec-expectations (= 2.0.0)
     rubyzip (0.9.4)
     selenium-webdriver (0.0.27)
       ffi (>= 0.6.1)
@@ -47,14 +60,17 @@ GEM
       rubyzip
     sinatra (1.0)
       rack (>= 1.0)
+    stackdeck (0.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  akephalos (>= 0.2.4)
   capybara (>= 0.3.9)
+  capybara-envjs (>= 0.1.6)
   evergreen!
   json_pure (>= 1.0.0)
   launchy (>= 0.3.5)
-  rspec (>= 2.0.0.beta.15)
+  rspec (~> 2.0)
   sinatra (>= 1.0)
