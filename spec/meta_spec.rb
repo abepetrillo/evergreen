@@ -27,5 +27,19 @@ describe Evergreen::Runner do
       it { should_not pass }
     end
   end
+
+  context "with modified setup" do
+    let(:root) { File.expand_path('suite2', File.dirname(__FILE__)) }
+
+    context "with awesome spec" do
+      let(:template) { 'awesome_spec.js' }
+      it { should pass }
+    end
+
+    context "with failing spec" do
+      let(:template) { 'failing_spec.js' }
+      it { should_not pass }
+    end
+  end
 end
 

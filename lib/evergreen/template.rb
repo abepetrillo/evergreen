@@ -12,7 +12,7 @@ module Evergreen
     end
 
     def full_path
-      File.join(root, 'spec/javascripts/templates', name)
+      File.join(root, Evergreen.template_dir, name)
     end
 
     def read

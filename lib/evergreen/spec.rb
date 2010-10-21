@@ -12,7 +12,7 @@ module Evergreen
     end
 
     def full_path
-      File.join(root, 'spec/javascripts', name)
+      File.join(root, Evergreen.spec_dir, name)
     end
 
     def read

@@ -30,13 +30,13 @@ module Evergreen
     end
 
     def specs
-      Dir.glob(File.join(root, 'spec/javascripts', '*_spec.{js,coffee}')).map do |path|
+      Dir.glob(File.join(root, Evergreen.spec_dir, '*_spec.{js,coffee}')).map do |path|
         Spec.new(self, File.basename(path))
       end
     end
 
     def templates
-      Dir.glob(File.join(root, 'spec/javascripts/templates', '*')).map do |path|
+      Dir.glob(File.join(root, Evergreen.template_dir, '*')).map do |path|
         Template.new(self, File.basename(path))
       end
     end
