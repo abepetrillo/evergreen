@@ -79,9 +79,8 @@ module Evergreen
     attr_reader :suite, :io
 
     def initialize(suite, io=STDOUT)
-      @io = io
       @suite = suite
-      @spec_results = {}
+      @io = io
     end
 
     def spec_runner(spec)
@@ -91,11 +90,16 @@ module Evergreen
     def run
       before = Time.now
 
+      io.puts ""
       io.puts dots.to_s
-      io.puts failure_messages.to_s
+      io.puts ""
+      if failure_messages
+        io.puts failure_messages
+        io.puts ""
+      end
 
       seconds = "%.2f" % (Time.now - before)
-      io.puts "\nFinished in #{seconds} seconds"
+      io.puts "Finished in #{seconds} seconds"
       io.puts "#{examples.size} examples, #{failed_examples.size} failures"
       passed?
     end
