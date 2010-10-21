@@ -89,9 +89,14 @@ module Evergreen
     end
 
     def run
-      io.puts dots
-      io.puts failure_messages
-      io.puts "\n#{examples.size} examples, #{failed_examples.size} failures"
+      before = Time.now
+
+      io.puts dots.to_s
+      io.puts failure_messages.to_s
+
+      seconds = "%.2f" % (Time.now - before)
+      io.puts "\nFinished in #{seconds} seconds"
+      io.puts "#{examples.size} examples, #{failed_examples.size} failures"
       passed?
     end
 
