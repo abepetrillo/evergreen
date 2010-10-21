@@ -8,7 +8,7 @@ http://github.com/jnicklas/evergreen
 
 == Philosophy
 
-Evergreen is a unit testing tool. It's purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
+Evergreen is a unit testing tool. Its purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 
 == Installation
 
