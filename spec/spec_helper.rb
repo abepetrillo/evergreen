@@ -17,11 +17,12 @@ module EvergreenMatchers
   class PassSpec # :nodoc:
     def matches?(actual)
       @actual = actual
-      @actual.passed?
+      @runner = Evergreen::Runner.new(actual.suite, StringIO.new).spec_runner(@actual)
+      @runner.passed?
     end
 
     def failure_message
-      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.failure_messages}"
+      "expected #{@actual.name} to pass, but it failed with:\n\n#{@runner.failure_messages}"
     end
 
     def negative_failure_message

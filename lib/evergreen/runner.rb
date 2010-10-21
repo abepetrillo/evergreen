@@ -9,10 +9,6 @@ module Evergreen
         @row['passed']
       end
 
-      def dot
-        if passed? then '.' else 'F' end
-      end
-
       def failure_message
         unless passed?
           msg = []
@@ -50,7 +46,20 @@ module Evergreen
       def examples
         @results ||= begin
           session.visit(spec.url)
-          session.wait_until(180) { session.evaluate_script('Evergreen.done') }
+
+          previous_results = ""
+
+          session.wait_until(180) do
+            dots = session.evaluate_script('Evergreen.dots')
+            io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
+            io.flush
+            previous_results = dots
+            session.evaluate_script('Evergreen.done')
+          end
+
+          dots = session.evaluate_script('Evergreen.dots')
+          io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
+
           JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
             Example.new(row)
           end
@@ -66,7 +75,7 @@ module Evergreen
       end
 
       def dots
-        examples.map { |example| example.dot }.join
+        examples; ""
       end
 
       def failure_messages
