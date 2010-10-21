@@ -1,13 +1,13 @@
 <script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
 <script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
 <script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
-<% if @js_spec_helper.exist? %>
-  <script type="text/javascript" src="<%= url("/spec/#{@js_spec_helper.name}") %>"></script>
-<% end %>
-<% if @coffee_spec_helper.exist? %>
-  <script type="text/javascript" src="<%= url("/spec/#{@coffee_spec_helper.name}") %>"></script>
-<% end %>
-<script type="text/javascript" src="<%= url("/spec/#{@spec.name}") %>"></script>
+<script type="text/javascript">
+  // <![CDATA[
+    <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
+    <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
+    <%= @spec.read %>;
+  // ]]>
+</script>
 
 <div id="page">
   <h1>Evergreen</h1>

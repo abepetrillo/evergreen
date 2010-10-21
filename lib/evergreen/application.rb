@@ -42,10 +42,6 @@ module Evergreen
               @coffee_spec_helper = suite.get_spec('spec_helper.coffee')
               erb :spec
             end
-
-            get '/spec/*' do |name|
-              suite.get_spec(name).read
-            end
           end
         end
         run app
