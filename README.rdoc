@@ -2,13 +2,13 @@
 
 "Because green is the new Blue(Ridge)"
 
-Evergreen is a tool to run javascript unit tests for client side JavaScript. It combines a runner which allows you to serve up and run your specs in a browser, as well as a headless runner based on envjs. Evergreen uses the Jasmine unit testing framework for JavaScript.
+Evergreen is a tool to run javascript unit tests for client side JavaScript. It combines a server which allows you to serve up and run your specs in a browser, as well as a runner which uses Capybara and any of its drivers to run your specs. Evergreen uses the Jasmine unit testing framework for JavaScript.
 
 http://github.com/jnicklas/evergreen
 
 == Philosophy
 
-Evergreen is a unit testing tool. It's purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
+Evergreen is a unit testing tool. Its purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 
 == Installation
 
@@ -39,7 +39,6 @@ Alternatively you can run the specs headlessly by running:
 
     evergreen run
 
-
 == Integrating with Rails 3
 
 Add Evergreen to your Gemfile:
@@ -51,6 +50,33 @@ Start your rails application and navigate to /evergreen/list. You should now see
 There's a rake task provided for you that you can use to run your specs:
 
     rake spec:javascripts
+
+== Integrating with Rails 2
+
+Add the following line to your Rakefile:
+
+    require 'evergreen/tasks'
+
+This will give you the `spec:javascripts` rake task. Note that mounting is not possible under Rails 2 and that `require 'evergreen/rails'` will fail.
+
+== Configuration
+
+By default, Evergreen uses Selenium to run your specs and assumes a certain directory structure. If this standard is fine for you, then you don't need to do anything else. If you need to configure Evergreen to suit your needs, Evergreen will automatically look for and load the following files:
+
+    config/evergreen.rb
+    .evergreen
+    ~/.evergreen
+
+The content of these files could look like this:
+
+    require 'capybara/envjs'
+
+    Evergreen.configure do |config|
+      config.driver = :envjs
+      config.public_dir = 'public_html'
+      config.template_dir = 'templates'
+      config.spec_dir = 'spec'
+    end
 
 == Transactions
 

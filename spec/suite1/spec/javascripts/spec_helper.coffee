@@ -1,1 +1,1 @@
-window.CoffeeSpecHelper: { coffee: 'script' }
+window.CoffeeSpecHelper = { coffee: 'script' }

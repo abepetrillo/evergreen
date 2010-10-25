@@ -1,26 +1,29 @@
+require 'open3'
+
 module Evergreen
   class Spec
+    class CoffeeScriptError < StandardError; end
 
-    def self.all(root)
-      Dir.glob(File.join(root, 'spec/javascripts', '*_spec.{js,coffee}')).map do |path|
-        new(root, File.basename(path))
-      end
-    end
+    attr_reader :name, :suite
 
-    attr_reader :name, :root
-
-    def initialize(root, name)
-      @root = root
+    def initialize(suite, name)
+      @suite = suite
       @name = name
     end
 
+    def root
+      suite.root
+    end
+
     def full_path
-      File.join(root, 'spec/javascripts', name)
+      File.join(root, Evergreen.spec_dir, name)
     end
 
     def read
       if full_path =~ /\.coffee$/
-        %x(coffee -p #{full_path})
+        stdout, stderr = Open3.popen3("coffee -p #{full_path}")[1,2].map { |b| b.read }
+        raise CoffeeScriptError, stderr unless stderr.empty?
+        stdout
       else
         File.read(full_path)
       end
@@ -31,13 +34,22 @@ module Evergreen
       "/run/#{name}"
     end
 
+    def passed?
+      runner.passed?
+    end
+
+    def failure_messages
+      runner.failure_messages
+    end
+
     def exist?
       File.exist?(full_path)
     end
 
-    def templates
-      Evergreen::Template.all(root)
-    end
+  protected
 
+    def runner
+      @runner ||= suite.runner.spec_runner(self)
+    end
   end
 end

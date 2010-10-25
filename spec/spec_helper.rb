@@ -5,19 +5,24 @@ require 'evergreen'
 require 'rspec'
 
 require 'capybara/dsl'
+require 'akephalos'
+require 'capybara/envjs'
 
-Capybara.app = Evergreen.application(File.expand_path('suite1', File.dirname(__FILE__)))
-Capybara.default_driver = :selenium
+TEST_DRIVER = :envjs
+
+Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
+Capybara.default_driver = TEST_DRIVER
 
 module EvergreenMatchers
   class PassSpec # :nodoc:
     def matches?(actual)
       @actual = actual
-      @actual.passed?
+      @runner = Evergreen::Runner.new(actual.suite, StringIO.new).spec_runner(@actual)
+      @runner.passed?
     end
 
     def failure_message
-      "expected #{@actual.name} to pass, but it failed with:\n\n#{@actual.failure_message}"
+      "expected #{@actual.name} to pass, but it failed with:\n\n#{@runner.failure_messages}"
     end
 
     def negative_failure_message
@@ -32,4 +37,8 @@ end
 
 RSpec.configure do |config|
   config.include EvergreenMatchers
+  config.before do
+    Evergreen.use_defaults!
+    Evergreen.driver = TEST_DRIVER
+  end
 end

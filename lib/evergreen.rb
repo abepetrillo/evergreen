@@ -4,68 +4,33 @@ require 'capybara'
 require 'capybara/wait_until'
 require 'launchy'
 require 'evergreen/version'
+require 'evergreen/application'
 require 'json'
 
 module Evergreen
   autoload :Cli, 'evergreen/cli'
   autoload :Server, 'evergreen/server'
   autoload :Runner, 'evergreen/runner'
+  autoload :Suite, 'evergreen/suite'
   autoload :Spec, 'evergreen/spec'
   autoload :Template, 'evergreen/template'
 
   class << self
-    def application(root, driver=:serve)
-      Rack::Builder.new do
-        map "/jasmine" do
-          use Rack::Static, :urls => ["/"], :root => File.expand_path('jasmine/lib', File.dirname(__FILE__))
-          run lambda { |env| [404, {}, "No such file"]}
-        end
+    attr_accessor :driver, :public_dir, :template_dir, :spec_dir
 
-        map "/resources" do
-          use Rack::Static, :urls => ["/"], :root => File.expand_path('evergreen/resources', File.dirname(__FILE__))
-          run lambda { |env| [404, {}, "No such file"]}
-        end
+    def configure
+      yield self
+    end
 
-        map "/" do
-          app = Class.new(Sinatra::Base).tap do |app|
-            app.reset!
-            app.class_eval do
-              set :static, true
-              set :root, File.expand_path('evergreen', File.dirname(__FILE__))
-              set :public, File.expand_path(File.join(root, 'public'), File.dirname(__FILE__))
-
-              helpers do
-                def url(path)
-                  request.env['SCRIPT_NAME'].to_s + path.to_s
-                end
-              end
-
-              get '/' do
-                @specs = Spec.all(root)
-                erb :list
-              end
-
-              get '/list' do
-                @specs = Spec.all(root)
-                erb :list
-              end
-
-              get '/run/*' do |name|
-                @spec = Spec.new(root, name)
-                @js_spec_helper = Spec.new(root, 'spec_helper.js')
-                @coffee_spec_helper = Spec.new(root, 'spec_helper.coffee')
-                @driver = driver
-                erb :spec
-              end
-
-              get '/spec/*' do |name|
-                Spec.new(root, name).read
-              end
-            end
-          end
-          run app
-        end
+    def use_defaults!
+      configure do |config|
+        config.driver = :selenium
+        config.public_dir = 'public'
+        config.spec_dir = 'spec/javascripts'
+        config.template_dir = 'spec/javascripts/templates'
       end
     end
   end
 end
+
+Evergreen.use_defaults!

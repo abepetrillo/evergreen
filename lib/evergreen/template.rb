@@ -1,21 +1,18 @@
 module Evergreen
   class Template
+    attr_reader :name, :suite
 
-    def self.all(root)
-      Dir.glob(File.join(root, 'spec/javascripts/templates', '*')).map do |path|
-        new(root, File.basename(path))
-      end
-    end
-
-    attr_reader :name, :root
-
-    def initialize(root, name)
-      @root = root
+    def initialize(suite, name)
+      @suite = suite
       @name = name
     end
 
+    def root
+      suite.root
+    end
+
     def full_path
-      File.join(root, 'spec/javascripts/templates', name)
+      File.join(root, Evergreen.template_dir, name)
     end
 
     def read

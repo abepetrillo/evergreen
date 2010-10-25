@@ -18,6 +18,8 @@ a {
 
 #test {
   min-height: 50px;
+  max-height: 300px;
+  overflow: auto;
   margin: 30px auto 30px;
 }
 

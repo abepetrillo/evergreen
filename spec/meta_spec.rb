@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Evergreen::Runner do
-  subject { Evergreen::Runner.new(spec) }
-  let(:spec) { Evergreen::Spec.new(root, template) }
+  let(:suite) { Evergreen::Suite.new(root) }
+  subject { Evergreen::Spec.new(suite, template) }
 
   context "with standard setup" do
     let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
@@ -22,8 +22,27 @@ describe Evergreen::Runner do
       it { should pass }
     end
 
+    context "invalid coffee" do
+      let(:template) { 'invalid_coffee_spec.coffee' }
+      it { should_not pass }
+    end
+
     context "with slow failing spec" do
       let(:template) { 'slow_spec.coffee' }
+      it { should_not pass }
+    end
+  end
+
+  context "with modified setup" do
+    let(:root) { File.expand_path('suite2', File.dirname(__FILE__)) }
+
+    context "with awesome spec" do
+      let(:template) { 'awesome_spec.js' }
+      it { should pass }
+    end
+
+    context "with failing spec" do
+      let(:template) { 'failing_spec.js' }
       it { should_not pass }
     end
   end
