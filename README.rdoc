@@ -45,7 +45,7 @@ Add Evergreen to your Gemfile:
 
     gem 'evergreen', :require => 'evergreen/rails'
 
-Start your rails application and navigate to /evergreen/list. You should now see a list of all spec files, click on one to run it.
+Start your rails application and navigate to /evergreen. You should now see a list of all spec files, click on one to run it.
 
 There's a rake task provided for you that you can use to run your specs:
 
