@@ -5,7 +5,6 @@ require 'evergreen'
 require 'rspec'
 
 require 'capybara/dsl'
-require 'akephalos'
 require 'capybara/envjs'
 
 TEST_DRIVER = :envjs
