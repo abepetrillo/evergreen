@@ -9,6 +9,13 @@ module Evergreen
     def serve
       server.boot
       Launchy.open(server.url('/'))
+      trap(:INT) do
+        if server.respond_to?(:shutdown)
+          server.shutdown
+        else
+          exit
+        end
+      end
       sleep
     end
 
