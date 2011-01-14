@@ -21,4 +21,9 @@ describe Evergreen, ".application" do
     page.should have_content("2 specs, 1 failure")
     page.should have_content("Expected 'bar' to equal 'noooooo'.")
   end
+
+  it "should add extensions to Evergreen" do
+    visit('/awesome')
+    page.should have_content('Totally awesome')
+  end
 end

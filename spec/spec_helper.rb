@@ -9,6 +9,12 @@ require 'capybara/envjs'
 
 TEST_DRIVER = :envjs
 
+Evergreen.extensions do
+  map "/awesome" do
+    run lambda { |env| [200, {}, "<html><body>Totally awesome</body></html>"]}
+  end
+end
+
 Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
 Capybara.default_driver = TEST_DRIVER
 
