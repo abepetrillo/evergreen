@@ -16,6 +16,10 @@ describe Evergreen::Suite do
     it "should find all specs in the given root directory" do
       subject.specs.map(&:name).should include('testing_spec.js', 'foo_spec.js', 'bar_spec.js', 'coffeescript_spec.coffee')
     end
+    
+    it "should find all specs in subdirectories of the given root directory" do
+      subject.specs.map(&:name).should include('subfolder_spec.js', 'another_subfolder_spec.js')
+    end    
   end
 
   describe '#templates' do
