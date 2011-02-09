@@ -129,6 +129,16 @@ You can also add a CoffeeScript spec helper, but remember that CoffeeScript encl
     MyThing: "foo"          # local to spec helper
     window.MyThing: "foo"   # global
 
+== Development
+
+If you're going to use/install the gem from a cloned repo/fork, make sure you check out Jasmine as well. This lives in a git submodule:
+
+    git submodule update --init
+
+will check it out. Building a gem from the repo or linking to it via Bundler's `:path` option won't work until you do this.
+
+*The bundler `:git` option will not work with this repo since it relies on a submodule. Use `:path` or build a gem instead.*
+
 == License:
 
 (The MIT License)
