@@ -20,3 +20,13 @@ describe Evergreen::Template do
   end
 
 end
+
+describe Evergreen::Template, "escaping" do
+  let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
+  let(:suite) { Evergreen::Suite.new(root) }
+  subject { Evergreen::Template.new(suite, 'escape.html') }
+
+  it "escapes contents" do
+    subject.escaped_contents.strip.should == %{"<scr" + "ipt>var foo = 0;</scr" + "ipt>\\n"}
+  end
+end
