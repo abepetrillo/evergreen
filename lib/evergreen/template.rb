@@ -20,6 +20,10 @@ module Evergreen
     end
     alias_method :contents, :read
 
+    def escaped_contents
+      contents.to_json.gsub("<script>", %{<scr" + "ipt>}).gsub("</script>", %{</scr" + "ipt>})
+    end
+
     def exist?
       File.exist?(full_path)
     end
