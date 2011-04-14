@@ -30,8 +30,8 @@ module Evergreen
     end
 
     def specs
-      Dir.glob(File.join(root, Evergreen.spec_dir, '*_spec.{js,coffee}')).map do |path|
-        Spec.new(self, File.basename(path))
+      Dir.glob(File.join(root, Evergreen.spec_dir, '**/*_spec.{js,coffee}')).map do |path|
+        Spec.new(self, path.gsub(File.join(root, Evergreen.spec_dir, ''), ''))
       end
     end
 
