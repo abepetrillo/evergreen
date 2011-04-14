@@ -6,7 +6,7 @@ describe Evergreen, ".application" do
   it "should show a successful test run" do
     visit("/")
     click_link("testing_spec.js")
-    page.should have_content("2 specs, 0 failures")
+    page.should have_content("3 specs, 0 failures")
   end
 
   it "should show a successful test run for a coffeescript spec" do

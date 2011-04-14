@@ -32,6 +32,10 @@ module Evergreen
               erb :list
             end
 
+            get '/spec/*' do |name|
+              suite.get_spec(name).read.to_s
+            end
+
             get '/run/*' do |name|
               @suite = suite
               @spec = suite.get_spec(name)

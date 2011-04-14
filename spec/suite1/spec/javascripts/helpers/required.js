@@ -1,0 +1,1 @@
+var var_from_required_file = true;

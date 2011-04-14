@@ -1,3 +1,5 @@
+require('/spec/helpers/required.js')
+
 describe('testing', function() {
 
   it("should pass", function() {
@@ -8,4 +10,7 @@ describe('testing', function() {
     expect('bar').toEqual('bar');
   });
 
+  it("should load required spec files", function() {
+    expect(var_from_required_file).toBe(true);
+  });
 });
