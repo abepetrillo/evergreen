@@ -1,12 +1,12 @@
 <script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
 <script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
 <script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
-<%- if @js_spec_helper.exist? -%>
+<% if @js_spec_helper.exist? %>
   <script type="text/javascript" src="<%= url("/spec/#{@js_spec_helper.name}") %>"></script>
-<%- end -%>
-<%- if @coffee_spec_helper.exist? -%>
+<% end %>
+<% if @coffee_spec_helper.exist? %>
   <script type="text/javascript" src="<%= url("/spec/#{@coffee_spec_helper.name}") %>"></script>
-<%- end -%>
+<% end %>
 <script type="text/javascript" src="<%= url("/spec/#{@spec.name}") %>"></script>
 
 <div id="page">
