@@ -33,7 +33,13 @@ module Evergreen
             end
 
             get '/spec/*' do |name|
-              suite.get_spec(name).read.to_s
+              content_type 'application/javascript'
+              begin
+                suite.get_spec(name).read.to_s
+              rescue => error
+                @error = error
+                erb :error, :layout => false
+              end
             end
 
             get '/run/*' do |name|
