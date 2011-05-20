@@ -28,7 +28,7 @@
   (function() {
     Evergreen.driver = <%= Evergreen.driver.to_json %>;
     <% @suite.templates.each do |template| %>
-      Evergreen.templates[<%= template.name.to_json %>] = <%= template.read.to_json %>;
+      Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
     <% end %>
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.addReporter(new jasmine.TrivialReporter());

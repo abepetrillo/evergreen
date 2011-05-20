@@ -1,2 +1,4 @@
 .rvmrc
 .bundle
+*.swp
+*.gem
