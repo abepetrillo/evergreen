@@ -5,9 +5,9 @@ require 'evergreen'
 require 'rspec'
 
 require 'capybara/dsl'
-require 'capybara/envjs'
+require 'capybara-webkit'
 
-TEST_DRIVER = :envjs
+TEST_DRIVER = :webkit
 
 Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
 Capybara.default_driver = TEST_DRIVER

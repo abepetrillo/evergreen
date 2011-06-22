@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Evergreen, ".application" do
-  include Capybara
+  include Capybara::DSL
 
   it "should show a successful test run" do
     visit("/")

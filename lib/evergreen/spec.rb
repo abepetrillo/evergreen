@@ -21,9 +21,8 @@ module Evergreen
 
     def read
       if full_path =~ /\.coffee$/
-        stdout, stderr = Open3.popen3("coffee -p #{full_path}")[1,2].map { |b| b.read }
-        raise CoffeeScriptError, stderr unless stderr.empty?
-        stdout
+        require 'coffee-script'
+        CoffeeScript.compile(File.read(full_path))
       else
         File.read(full_path)
       end
