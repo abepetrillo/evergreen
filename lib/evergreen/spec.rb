@@ -2,8 +2,6 @@ require 'open3'
 
 module Evergreen
   class Spec
-    class CoffeeScriptError < StandardError; end
-
     attr_reader :name, :suite
 
     def initialize(suite, name)

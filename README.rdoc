@@ -2,13 +2,19 @@
 
 "Because green is the new Blue(Ridge)"
 
-Evergreen is a tool to run javascript unit tests for client side JavaScript. It combines a server which allows you to serve up and run your specs in a browser, as well as a runner which uses Capybara and any of its drivers to run your specs. Evergreen uses the Jasmine unit testing framework for JavaScript.
+Evergreen is a tool to run javascript unit tests for client side JavaScript. It
+combines a server which allows you to serve up and run your specs in a browser,
+as well as a runner which uses Capybara and any of its drivers to run your
+specs. Evergreen uses the Jasmine unit testing framework for JavaScript.
 
 http://github.com/jnicklas/evergreen
 
 == Philosophy
 
-Evergreen is a unit testing tool. Its purpose is to test JavaScript in isolation from your application. If you need a tool that tests how your JavaScript integrates with your application you should use an integration testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
+Evergreen is a unit testing tool. Its purpose is to test JavaScript in
+isolation from your application. If you need a tool that tests how your
+JavaScript integrates with your application you should use an integration
+testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 
 == Installation
 
@@ -18,7 +24,9 @@ Install as a Ruby gem:
 
 == Usage
 
-Evergreen assumes a file and directory structure, place all your javascript code inside ./public and all spec files inside ./spec/javascripts. All spec files should end in _spec.js. For example:
+Evergreen assumes a file and directory structure, place all your javascript
+code inside ./public and all spec files inside ./spec/javascripts. All spec
+files should end in _spec.js. For example:
 
     public/widget.js
     spec/javascripts/widget_spec.js
@@ -31,7 +39,8 @@ You can require files from the public directory inside your spec file:
       ...
     });
 
-You can now look at your spec files inside a browser by starting up the Evergreen server:
+You can now look at your spec files inside a browser by starting up the
+Evergreen server:
 
     evergreen serve
 
@@ -45,7 +54,8 @@ Add Evergreen to your Gemfile:
 
     gem 'evergreen', :require => 'evergreen/rails'
 
-Start your rails application and navigate to /evergreen. You should now see a list of all spec files, click on one to run it.
+Start your rails application and navigate to /evergreen. You should now see a
+list of all spec files, click on one to run it.
 
 There's a rake task provided for you that you can use to run your specs:
 
@@ -57,11 +67,15 @@ Add the following line to your Rakefile:
 
     require 'evergreen/tasks'
 
-This will give you the `spec:javascripts` rake task. Note that mounting is not possible under Rails 2 and that `require 'evergreen/rails'` will fail.
+This will give you the `spec:javascripts` rake task. Note that mounting is not
+possible under Rails 2 and that `require 'evergreen/rails'` will fail.
 
 == Configuration
 
-By default, Evergreen uses Selenium to run your specs and assumes a certain directory structure. If this standard is fine for you, then you don't need to do anything else. If you need to configure Evergreen to suit your needs, Evergreen will automatically look for and load the following files:
+By default, Evergreen uses Selenium to run your specs and assumes a certain
+directory structure. If this standard is fine for you, then you don't need to
+do anything else. If you need to configure Evergreen to suit your needs,
+Evergreen will automatically look for and load the following files:
 
     config/evergreen.rb
     .evergreen
@@ -80,7 +94,12 @@ The content of these files could look like this:
 
 == Transactions
 
-One problem often faced when writing unit tests for client side code is that changes to the page are not reverted for the next example, so that successive examples become dependent on each other. Evergreen adds a special div to your page with an id of test. This div is automatically emptied before each example. You should avoid appending markup to the page body and instead append it to this test div:
+One problem often faced when writing unit tests for client side code is that
+changes to the page are not reverted for the next example, so that successive
+examples become dependent on each other. Evergreen adds a special div to your
+page with an id of test. This div is automatically emptied before each example.
+You should avoid appending markup to the page body and instead append it to
+this test div:
 
     describe('transactions', function() {
       it("should add stuff in one test...", function() {
@@ -95,12 +114,14 @@ One problem often faced when writing unit tests for client side code is that cha
 
 == Templates
 
-Even more powerful than that, Evergreen allows you to create HTML templates to go along with your specs. Put the templates in their own folder like this:
+Even more powerful than that, Evergreen allows you to create HTML templates to
+go along with your specs. Put the templates in their own folder like this:
 
     spec/javascripts/templates/one_template.html
     spec/javascripts/templates/another_template.html
 
-You can then load the template into the test div, by calling the template function in your specs:
+You can then load the template into the test div, by calling the template
+function in your specs:
 
     describe('transactions', function() {
       template('one_template.html')
@@ -116,18 +137,35 @@ If you add a spec_helper file like so:
 
     spec/javascripts/spec_helper.js
 
-It will automatically be loaded. This is a great place for adding custom matchers and the like.
+It will automatically be loaded. This is a great place for adding custom
+matchers and the like.
 
 == CoffeeScript
 
-Evergreen supports specs written in {CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your spec file _spec.coffee and it will automatically be translated for you.
+Evergreen supports specs written in
+{CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your spec
+file _spec.coffee and it will automatically be translated for you.
 
-You can also add a CoffeeScript spec helper, but remember that CoffeeScript encloses individual files in a closure, if you need something you define in the spec helper to be available in your spec files, attach it to the window object:
+You can also add a CoffeeScript spec helper, but remember that CoffeeScript
+encloses individual files in a closure, if you need something you define in the
+spec helper to be available in your spec files, attach it to the window object:
 
     # spec/javascripts/spec_helper.coffee
 
     MyThing: "foo"          # local to spec helper
     window.MyThing: "foo"   # global
+
+== Development
+
+If you plan to work on Evergreen, you need to checkout the Jasmine gem, which
+is added as a git submodule. Run the following command:
+
+    git submodule update --init
+
+If you're using a version of Evergreen from git with bundler, you need to tell
+bundler to use submodules, this can be achieved with the following command:
+
+    gem 'evergreen', :submodules => true, :git => 'git://github.com/jnicklas/evergreen.git'
 
 == License:
 

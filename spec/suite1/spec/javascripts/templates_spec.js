@@ -33,6 +33,14 @@ describe('templates', function() {
     });
   });
 
+  describe('with template with script tags', function() {
+    template('script_tags.html')
+
+    it("should append the template to the test div", function() {
+      expect($('#test h1#script-tags').length).toEqual(1);
+    });
+  });
+
 });
 
 describe('stylesheet', function() {
