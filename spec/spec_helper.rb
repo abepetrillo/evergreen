@@ -11,7 +11,7 @@ TEST_DRIVER = :webkit
 
 Evergreen.extensions do
   map "/awesome" do
-    run lambda { |env| [200, {}, "<html><body>Totally awesome</body></html>"]}
+    run lambda { |env| [200, {'Content-Type' => 'text/html'}, "<html><body>Totally awesome</body></html>"]}
   end
 end
 
