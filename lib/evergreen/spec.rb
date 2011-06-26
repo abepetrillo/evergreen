@@ -28,7 +28,7 @@ module Evergreen
     alias_method :contents, :read
 
     def url
-      "/run/#{name}"
+      "#{suite.mounted_at}/run/#{name}"
     end
 
     def passed?

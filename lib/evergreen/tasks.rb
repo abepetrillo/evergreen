@@ -1,6 +1,10 @@
 require 'evergreen'
 
-Dir[File.join(File.dirname(__FILE__), '..', 'tasks', '*.rake')].each do |f|
-  load f
+# Rails 2.3 Rake tasks
+namespace :spec do
+  desc "Run JavaScript specs via Evergreen"
+  task :javascripts => :environment do
+    result = Evergreen::Suite.new(Rails.root).run
+    Kernel.exit(1) unless result
+  end
 end
-
