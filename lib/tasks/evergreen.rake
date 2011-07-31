@@ -1,12 +1,9 @@
 namespace :spec do
   desc "Run JavaScript specs via Evergreen"
   task :javascripts => [:precompile_assets] do
-    begin
       result = Evergreen::Suite.new(Rails.root).run
       Kernel.exit(1) unless result 
-    ensure
       Rake.application['spec:clean_assets'].invoke
-    end
   end
 
   desc "Precompile Assets for Testing"
