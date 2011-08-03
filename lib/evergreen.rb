@@ -13,6 +13,7 @@ module Evergreen
   autoload :Suite, 'evergreen/suite'
   autoload :Spec, 'evergreen/spec'
   autoload :Template, 'evergreen/template'
+  autoload :Reports, 'evergreen/reports'
 
   class << self
     attr_accessor :driver, :public_dir, :template_dir, :spec_dir
