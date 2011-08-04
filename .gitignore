@@ -1,3 +1,4 @@
 .rvmrc
 .bundle
 Gemfile.lock
+*.swp
