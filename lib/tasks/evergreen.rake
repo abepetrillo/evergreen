@@ -13,6 +13,7 @@ namespace :spec do
       Rake.application['environment'].invoke
       test_asset_path = Rails.root.join("public/assets")
       sh "mkdir -p #{test_asset_path}", {:verbose => false}
+      Rails.application.assets.paths << File.join(Rails.root, 'spec', 'javascripts', 'helpers')      
       Rails.application.assets.static_root = test_asset_path
       Rake.application['spec:clean_assets'].invoke
       Rake.application['assets:precompile'].invoke
