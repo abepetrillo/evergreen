@@ -3,11 +3,6 @@ module Evergreen
     Rack::Builder.new do
       instance_eval(&Evergreen.extensions) if Evergreen.extensions
 
-      map "/jasmine" do
-        use Rack::Static, :urls => ["/"], :root => File.expand_path('../jasmine/lib', File.dirname(__FILE__))
-        run lambda { |env| [404, {}, "No such file"]}
-      end
-
       map "/resources" do
         use Rack::Static, :urls => ["/"], :root => File.expand_path('resources', File.dirname(__FILE__))
         run lambda { |env| [404, {}, "No such file"]}
