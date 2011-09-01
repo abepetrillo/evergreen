@@ -32,6 +32,14 @@ module Evergreen
               erb :list
             end
 
+            get '/run/all' do 
+              @suite = suite
+              @js_spec_helper = suite.get_spec('spec_helper.js')
+              @coffee_spec_helper = suite.get_spec('spec_helper.coffee')
+
+              erb :all
+            end
+
             get '/run/*' do |name|
               @suite = suite
               @spec = suite.get_spec(name)
