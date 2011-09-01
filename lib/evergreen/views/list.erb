@@ -2,6 +2,8 @@
   <h1>Evergreen</h1>
 
   <ul id="specs">
+    <li><a href="/run/all">All</a></li>
+
     <% @suite.specs.each do |spec| %>
       <li><a href="<%= url(spec.url) %>"><%= spec.name %></a></li>
     <% end %>
