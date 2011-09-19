@@ -7,7 +7,7 @@
       <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
       <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
       <% @suite.specs.each do |spec| %>
-        <%= spec.read %>;
+        describe("<%= spec.name %>", function() { <%= spec.read %>; });
       <% end %>
     <% rescue StandardError => e %>
       describe("failure", function() {
@@ -15,8 +15,6 @@
           throw(<%= "#{e.class}: #{e.message}".to_json %>);
         });
       });
-console.dir(<%= e.backtrace.to_json %>)
-
     <% end %>
   // ]]>
 </script>
