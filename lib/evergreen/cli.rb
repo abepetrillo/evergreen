@@ -8,6 +8,12 @@ module Evergreen
       command = argv.shift
       Evergreen.root = File.expand_path(argv.shift || '.', Dir.pwd)
 
+      # detect Rails apps
+      if File.exist?(File.join(Evergreen.root, 'config/environment.rb'))
+        require File.join(Evergreen.root, 'config/environment.rb')
+        require 'evergreen/rails' if defined?(Rails)
+      end
+
       case command
       when "serve"
         Evergreen::Suite.new.serve
