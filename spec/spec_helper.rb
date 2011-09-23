@@ -9,13 +9,14 @@ require 'capybara-webkit'
 
 TEST_DRIVER = :webkit
 
+Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
 Evergreen.extensions do
   map "/awesome" do
-    run lambda { |env| [200, {'Content-Type' => 'text/html'}, "<html><body>Totally awesome</body></html>"]}
+    run lambda { |env| [200, {'Content-Type' => 'text/html'}, ["<html><body>Totally awesome</body></html>"]]}
   end
 end
 
-Capybara.app = Evergreen::Suite.new(File.expand_path('suite1', File.dirname(__FILE__))).application
+Capybara.app = Evergreen.application
 Capybara.default_driver = TEST_DRIVER
 
 module EvergreenMatchers
@@ -44,6 +45,8 @@ RSpec.configure do |config|
   config.include EvergreenMatchers
   config.before do
     Evergreen.use_defaults!
+    Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
     Evergreen.driver = TEST_DRIVER
+    Evergreen.application = Evergreen.build_application
   end
 end

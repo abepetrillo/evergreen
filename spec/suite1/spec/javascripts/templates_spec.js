@@ -47,9 +47,6 @@ describe('stylesheet', function() {
   template('one_template.html')
 
   it("should style the template", function() {
-    // Env-js does not have support for stylesheets
-    if (Evergreen.driver != "envjs") {
-      expect(document.getElementById('from-template').offsetWidth).toEqual(300)
-    }
+    expect(document.getElementById('from-template').offsetWidth).toEqual(300)
   });
 });

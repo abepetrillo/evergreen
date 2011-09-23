@@ -6,14 +6,14 @@ module Evergreen
 
     def execute(argv)
       command = argv.shift
-      root    = File.expand_path(argv.shift || '.', Dir.pwd)
+      Evergreen.root = File.expand_path(argv.shift || '.', Dir.pwd)
 
       case command
       when "serve"
-        Evergreen::Suite.new(root).serve
+        Evergreen::Suite.new.serve
         return true
       when "run"
-        return Evergreen::Suite.new(root).run
+        return Evergreen::Suite.new.run
       else
         puts "no such command '#{command}'"
         return false

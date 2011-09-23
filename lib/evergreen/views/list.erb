@@ -3,7 +3,7 @@
 
   <ul id="specs">
     <% @suite.specs.each do |spec| %>
-      <li><a href="<%= url(spec.url) %>"><%= spec.name %></a></li>
+      <li><a href="<%= spec.url %>"><%= spec.name %></a></li>
     <% end %>
   </ul>
 </div>

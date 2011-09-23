@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe Evergreen::Spec do
-  let(:root) { File.expand_path('suite1', File.dirname(__FILE__)) }
-  let(:suite) { Evergreen::Suite.new(root) }
+  let(:suite) { Evergreen::Suite.new }
   subject { Evergreen::Spec.new(suite, 'testing_spec.js') }
 
   its(:name) { should == 'testing_spec.js' }
-  its(:root) { should == root }
-  its(:full_path) { should == "#{root}/spec/javascripts/testing_spec.js" }
+  its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
+  its(:full_path) { should == File.expand_path("spec/javascripts/testing_spec.js", Evergreen.root) }
   its(:url) { should == "/run/testing_spec.js" }
   its(:contents) { should =~ /describe\('testing'/ }
 

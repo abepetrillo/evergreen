@@ -1,12 +1,8 @@
 module Evergreen
   class Suite
-    attr_reader :root, :mounted_at, :runner, :server, :driver, :application
+    attr_reader :runner, :server, :driver, :application
 
-    def initialize(root, options={})
-      @root = root
-      @mounted_at = options[:mounted_at]
-      @application = options[:application]
-
+    def initialize
       paths = [
         File.expand_path("config/evergreen.rb", root),
         File.expand_path(".evergreen", root),
@@ -16,7 +12,15 @@ module Evergreen
 
       @runner = Runner.new(self)
       @server = Server.new(self)
-      @application ||= Evergreen.application(self)
+      @application = Evergreen.application
+    end
+
+    def root
+      Evergreen.root
+    end
+
+    def mounted_at
+      Evergreen.mounted_at
     end
 
     def run
