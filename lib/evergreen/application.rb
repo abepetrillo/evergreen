@@ -49,7 +49,7 @@ module Evergreen
                 @suite = Evergreen::Suite.new
                 @js_spec_helper = @suite.get_spec('spec_helper.js')
                 @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
-                erb :all
+                erb :run
               end
 
               get '/run/*' do |name|
@@ -57,7 +57,7 @@ module Evergreen
                 @spec = @suite.get_spec(name)
                 @js_spec_helper = @suite.get_spec('spec_helper.js')
                 @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
-                erb :spec
+                erb :run
               end
             end
           end

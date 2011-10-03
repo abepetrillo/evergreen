@@ -5,10 +5,14 @@
   // <![CDATA[
       <%= render_spec(@coffee_spec_helper) %>;
       <%= render_spec(@js_spec_helper) %>;
-      <% @suite.specs.each do |spec| %>
-        describe("<%= spec.name %>", function() {
-          <%= render_spec(spec) %>;
-        });
+      <% if @spec %>
+        <%= render_spec(@spec) %>
+      <% else %>
+        <% @suite.specs.each do |spec| %>
+          describe("<%= spec.name %>", function() {
+            <%= render_spec(spec) %>;
+          });
+        <% end %>
       <% end %>
   // ]]>
 </script>
