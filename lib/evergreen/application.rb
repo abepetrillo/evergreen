@@ -32,6 +32,12 @@ module Evergreen
                 def url(path)
                   Evergreen.mounted_at.to_s + path.to_s
                 end
+
+                def render_spec(spec)
+                  spec.read if spec
+                rescue StandardError => error
+                  erb :_spec_error, :locals => { :error => error }
+                end
               end
 
               get '/' do
