@@ -1,9 +1,9 @@
 <div id="page">
   <h1>Evergreen</h1>
 
-  <ul id="specs">
-    <li><a href="/run/all">All</a></li>
+  <a class="all" href="<%= url('/run/all') %>">All</a>
 
+  <ul id="specs">
     <% @suite.specs.each do |spec| %>
       <li><a href="<%= spec.url %>"><%= spec.name %></a></li>
     <% end %>
