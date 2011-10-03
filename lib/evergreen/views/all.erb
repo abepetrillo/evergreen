@@ -1,0 +1,42 @@
+<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
+<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
+<script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
+<script type="text/javascript">
+  // <![CDATA[
+    <% begin %>
+      <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
+      <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
+      <% @suite.specs.each do |spec| %>
+        describe("<%= spec.name %>", function() { <%= spec.read %>; });
+      <% end %>
+    <% rescue StandardError => e %>
+      describe("failure", function() {
+        it("should not fail", function() {
+          throw(<%= "#{e.class}: #{e.message}".to_json %>);
+        });
+      });
+    <% end %>
+  // ]]>
+</script>
+
+<div id="page">
+  <h1>Evergreen</h1>
+  <a class="back" href="<%= url("/") %>">Back to list</a>
+</div>
+
+<div id="test"></div>
+
+<script type="text/javascript">
+  // <![CDATA[
+    (function() {
+      Evergreen.driver = <%= Evergreen.driver.to_json %>;
+      <% @suite.templates.each do |template| %>
+        Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
+      <% end %>
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.addReporter(new jasmine.TrivialReporter());
+      jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
+      jasmineEnv.execute();
+    })();
+  // ]]>
+</script>
