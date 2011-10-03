@@ -29,6 +29,22 @@ describe Evergreen, ".application" do
     page.should have_content("Expected 'bar' to equal 'noooooo'.")
   end
 
+  it "should run a spec inline" do
+    visit("/")
+    within('li', :text => 'testing_spec.js') do
+      click_link("Run")
+      page.should have_content('Pass')
+    end
+  end
+
+  it "should run a failing spec inline" do
+    visit("/")
+    within('li', :text => 'failing_spec.js') do
+      click_link("Run")
+      page.should have_content('Fail')
+    end
+  end
+
   it "should add extensions to Evergreen" do
     visit('/awesome')
     page.should have_content('Totally awesome')

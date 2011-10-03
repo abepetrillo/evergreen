@@ -1,11 +1,19 @@
+<script type="text/javascript" src="<%= url("/resources/jquery.js") %>"></script>
+<script type="text/javascript" src="<%= url("/resources/list.js") %>"></script>
 <div id="page">
   <h1>Evergreen</h1>
 
-  <a class="all" href="<%= url('/run/all') %>">All</a>
+  <div id="all">
+    <a class="all" href="<%= url('/run/all') %>">All</a>
+    <a class="run" href="<%= url('/run/all') %>">Run</a>
+  </div>
 
   <ul id="specs">
     <% @suite.specs.each do |spec| %>
-      <li><a href="<%= spec.url %>"><%= spec.name %></a></li>
+      <li>
+        <a href="<%= spec.url %>"><%= spec.name %></a>
+        <a class="run" href="<%= spec.url %>">Run</a>
+      </li>
     <% end %>
   </ul>
 </div>

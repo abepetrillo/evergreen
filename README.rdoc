@@ -83,10 +83,10 @@ Evergreen will automatically look for and load the following files:
 
 The content of these files could look like this:
 
-    require 'capybara/envjs'
+    require 'capybara-webkit'
 
     Evergreen.configure do |config|
-      config.driver = :envjs
+      config.driver = :webkit
       config.public_dir = 'public_html'
       config.template_dir = 'templates'
       config.spec_dir = 'spec'
