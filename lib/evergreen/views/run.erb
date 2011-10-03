@@ -3,8 +3,8 @@
 <script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
 <script type="text/javascript">
   // <![CDATA[
-      <%= render_spec(@coffee_spec_helper) %>;
-      <%= render_spec(@js_spec_helper) %>;
+      <%= render_spec(@coffee_spec_helper) if @coffee_spec_helper.exist? %>;
+      <%= render_spec(@js_spec_helper) if @js_spec_helper.exist? %>;
       <% if @spec %>
         <%= render_spec(@spec) %>
       <% else %>
