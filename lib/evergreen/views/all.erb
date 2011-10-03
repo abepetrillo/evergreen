@@ -3,19 +3,21 @@
 <script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
 <script type="text/javascript">
   // <![CDATA[
-    <% begin %>
       <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
       <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
       <% @suite.specs.each do |spec| %>
-        describe("<%= spec.name %>", function() { <%= spec.read %>; });
-      <% end %>
-    <% rescue StandardError => e %>
-      describe("failure", function() {
-        it("should not fail", function() {
-          throw(<%= "#{e.class}: #{e.message}".to_json %>);
+        describe("<%= spec.name %>", function() {
+          <% begin %>
+            <%= spec.read %>
+          <% rescue StandardError => e %>
+            describe("failure", function() {
+              it("should not fail", function() {
+                throw(<%= "#{e.class}: #{e.message}".to_json %>);
+              });
+            });
+          <% end %>
         });
-      });
-    <% end %>
+      <% end %>
   // ]]>
 </script>
 
