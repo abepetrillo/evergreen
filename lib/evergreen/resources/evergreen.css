@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00A500;
+  color: #4DA524;
 }
 
 #page, #test, .jasmine_reporter {
@@ -13,7 +13,8 @@ a {
   -moz-border-radius: 3px;
   padding: 20px;
   margin: 50px auto 30px;
-  border: 1px solid #ddd
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.05)
 }
 
 #test {
@@ -30,6 +31,9 @@ a {
 #page h1 {
   font-size: 24px;
   margin: 0 0 15px;
+  border-bottom: 3px solid #AEAEAE;
+  text-transform: uppercase;
+  padding-bottom: 4px;
 }
 
 #page a.back {
@@ -37,9 +41,10 @@ a {
 }
 
 #page #all {
-  margin: 1em 0 2em;
-  background: #f0f0f0;
-  padding: 1em 0;
+  border-bottom: 3px solid #ECECEC;
+  padding: 12px 0;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 #page ul {
@@ -49,37 +54,97 @@ a {
 
 #page ul li {
   list-style: none;
-  border-top: 1px solid #ddd;
-  margin: 10px 0 0;
-  padding: 10px 0 0;
+  border-bottom: 1px solid #ECECEC;
+  margin: 1px 0 0;
+  padding: 8px 0;
   position: relative;
+  overflow: hidden;
+}
+
+#page ul li:last-child {
+  border: none;
+}
+
+/*#page ul li:hover, #page #all:hover {
+  background: #FBFBFB;
+}*/
+
+#page ul li a:first-child, #page #all a:first-child {
+  margin-top: 3px;
+  float: left;
+  padding: 4px 2px;
+}
+
+#page ul li a:first-child:hover, #page #all a:first-child:hover {
+  background: #4DA524;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
 }
 
 #page a.run {
   display: block;
   float: right;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 2px 10px;
-  background: #eee;
-  color: #888;
+  border-radius: 3px;
+  padding: 4px 10px;
+  color: #484848;
   text-decoration: none;
+  border: 1px solid #CBCBCB;
+  border-bottom-color: #BDBDBD;
+  background: #D8D8D8;
+  background: -moz-linear-gradient(top, #eaeaea 1%, #d1d1d1 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#eaeaea), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* IE10+ */
+  background: linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* W3C */
+}
+
+#page a.run:hover {
+  box-shadow: inset 0 1px 6px 2px rgba(255,255,255,0.8);
+  text-shadow: 0px 0px 4px rgba(255,255,255,0.7);
 }
 
 #page a.run.pass {
-  border-color: #5B9E24;
-  background: #73B83B;
-  color: #2B4A11;
+  border-color: #45991E;
+  color: #fff;
+  background: #4DA524;
+  background: -moz-linear-gradient(top, #4DA524 1%, #408B1D 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#eaeaea), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* IE10+ */
+  background: linear-gradient(top, #eaeaea 1%,#d1d1d1 100%); /* W3C */
+  box-shadow: inset 0 1px 6px 1px rgba(255,255,255,0.2);
+  text-shadow: 0px 0px 4px rgba(255,255,255,0.2);
 }
 
 #page a.run.fail {
-  border-color: #7D1818;
-  background: #B33434;
-  color: #3D0808;
+  border-color: #CB3737;
+  color: #fff;
+  background: #E24040;
+  background: -moz-linear-gradient(top, #E24040 1%, #C53838 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#E24040), color-stop(100%,#C53838)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #E24040 1%,#C53838 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #E24040 1%,#C53838 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #E24040 1%,#C53838 100%); /* IE10+ */
+  background: linear-gradient(top, #E24040 1%,#C53838 100%); /* W3C */
 }
 
-#page a.run.running {
+#page a.run.pass:hover, #page a.run.fail:hover {
+box-shadow: inset 0 1px 6px 2px rgba(255,255,255,0.3);
+text-shadow: 0px 0px 4px rgba(255,255,255,0.3)
+}
+
+#page a.run.running, #page a.run.running:hover {
   border-color: blue;
+  background-image: url("data:image/gif,GIF89a%10%00%10%00%F2%00%00%FF%FF%FF%00%00%00%C2%C2%C2BBB%00%00%00bbb%82%82%82%92%92%92!%FE%1ACreated%20with%20ajaxload.info%00!%F9%04%00%0A%00%00%00!%FF%0BNETSCAPE2.0%03%01%00%00%00%2C%00%00%00%00%10%00%10%00%00%033%08%BA%DC%FE0%CAIk%13c%08%3A%08%19%9C%07N%98f%09E%B11%C2%BA%14%99%C1%B6.%60%C4%C2q%D0-%5B%189%DD%A6%079%18%0C%07Jk%E7H%00%00!%F9%04%00%0A%00%01%00%2C%00%00%00%00%10%00%10%00%00%034%08%BA%DC%FEN%8C!%20%1B%84%0C%BB%B0%E6%8ADqBQT%601%19%20%60LE%5B%1A%A8%7C%1C%B5u%DF%EDa%18%07%80%20%D7%18%E2%86C%19%B2%25%24*%12%00!%F9%04%00%0A%00%02%00%2C%00%00%00%00%10%00%10%00%00%036%08%BA2%23%2B%CAA%C8%90%CC%94V%2F%06%85c%1C%0E%F4%19N%F1IBa%98%ABp%1C%F0%0A%CC%B3%BD%1C%C6%A8%2B%02Y%ED%17%FC%01%83%C3%0F2%A9d%1A%9F%BF%04%00!%F9%04%00%0A%00%03%00%2C%00%00%00%00%10%00%10%00%00%033%08%BAb%25%2B%CA2%86%91%EC%9CV_%85%8B%A6%09%85!%0C%041D%87a%1C%11%AAF%82%B0%D1%1F%03bR%5D%F3%3D%1F08%2C%1A%8F%C8%A4r9L%00%00!%F9%04%00%0A%00%04%00%2C%00%00%00%00%10%00%10%00%00%032%08%BAr'%2BJ%E7d%14%F0%18%F3L%81%0C%26v%C3%60%5CbT%94%85%84%B9%1EhYB)%CF%CA%40%10%03%1E%E9%3C%1F%C3%26%2C%1A%8F%C8%A4R%92%00%00!%F9%04%00%0A%00%05%00%2C%00%00%00%00%10%00%10%00%00%033%08%BA%20%C2%909%17%E3t%E7%BC%DA%9E0%19%C7%1C%E0!.B%B6%9D%CAW%AC%A21%0C%06%0B%14sa%BB%B05%F7%95%01%810%B0%09%89%BB%9Fm)J%00%00!%F9%04%00%0A%00%06%00%2C%00%00%00%00%10%00%10%00%00%032%08%BA%DC%FE%F0%09%11%D9%9CU%5D%9A%01%EE%DAqp%95%60%88%DDa%9C%DD4%96%85AF%C50%14%90%60%9B%B6%01%0D%04%C2%40%10%9B1%80%C2%D6%CE%91%00%00!%F9%04%00%0A%00%07%00%2C%00%00%00%00%10%00%10%00%00%032%08%BA%DC%FE0%CAI%ABeB%D4%9C)%D7%1E%08%08%C3%20%8E%C7q%0E%0410%A9%CA%B0%AEP%18%C2a%18%07V%DA%A5%02%20ub%18%82%9E%5B%11%90%00%00%3B%00%00%00%00%00%00%00%00%00");
+  background-repeat: no-repeat;
+  background-position: center center;
+  text-indent: -999999px;
+  padding-right: 14px;
+  padding-left: 14px;
+  border-color: #EDEDED;
 }
 
 #footer {
@@ -88,4 +153,20 @@ a {
   text-align: center;
   font-size: 13px;
   color: #aaa;
+}
+
+#footer a.elabs {
+  position: relative;
+  padding-left: 30px;
+}
+
+#footer a.elabs img {
+  width: 23px;
+  opacity: 0.6;
+  position: absolute;
+  top: -4px;
+  left: 3px;
+}
+#footer a.elabs:hover img {
+  opacity: 1;
 }

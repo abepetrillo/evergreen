@@ -26,7 +26,7 @@ module Evergreen
             app.class_eval do
               set :static, true
               set :root, File.expand_path('.', File.dirname(__FILE__))
-              set :public, File.expand_path(File.join(Evergreen.root, Evergreen.public_dir), File.dirname(__FILE__))
+              set :public_folder, File.expand_path(File.join(Evergreen.root, Evergreen.public_dir), File.dirname(__FILE__))
 
               helpers do
                 def url(path)
