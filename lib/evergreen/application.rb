@@ -63,6 +63,8 @@ module Evergreen
           end
           run app
         end
+      end.tap do |app|
+        def app.inspect; '<Evergreen Application>'; end
       end
     end
   end
