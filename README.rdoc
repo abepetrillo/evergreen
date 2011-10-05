@@ -16,6 +16,14 @@ isolation from your application. If you need a tool that tests how your
 JavaScript integrates with your application you should use an integration
 testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 
+== Community
+
+Please ask questions on the {mailing
+list}[http://groups.google.com/group/ruby-evergreen].  If you have found a
+reproducible error, please {file it on
+GitHub}[https://github.com/jnicklas/evergreen/issues]. Do not contact the
+maintainers directly.
+
 == Installation
 
 Install as a Ruby gem:
