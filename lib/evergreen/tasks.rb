@@ -4,7 +4,7 @@ require 'evergreen'
 namespace :spec do
   desc "Run JavaScript specs via Evergreen"
   task :javascripts => :environment do
-    result = Evergreen::Suite.new(Rails.root).run
+    result = Evergreen::Suite.new.run
     Kernel.exit(1) unless result
   end
 end
