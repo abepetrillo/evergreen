@@ -36,12 +36,12 @@ Evergreen assumes a file and directory structure, place all your javascript
 code inside ./public and all spec files inside ./spec/javascripts. All spec
 files should end in _spec.js. For example:
 
-    public/widget.js
+    public/javascripts/widget.js
     spec/javascripts/widget_spec.js
 
 You can require files from the public directory inside your spec file:
 
-    require('/widget.js')
+    require('/javascripts/widget.js')
 
     describe('a widget', function() {
       ...
