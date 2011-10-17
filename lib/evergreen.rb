@@ -35,6 +35,15 @@ module Evergreen
         config.mounted_at = ""
       end
     end
+
+    def load_user_config!
+      paths = [
+        File.expand_path("config/evergreen.rb", root),
+        File.expand_path(".evergreen", root),
+        "#{ENV["HOME"]}/.evergreen"
+      ]
+      paths.each { |path| load(path) if File.exist?(path) }
+    end
   end
 end
 

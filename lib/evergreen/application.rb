@@ -7,6 +7,8 @@ module Evergreen
     end
 
     def build_application
+      Evergreen.load_user_config!
+
       Rack::Builder.new do
         instance_eval(&Evergreen.extensions) if Evergreen.extensions
 
