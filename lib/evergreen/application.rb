@@ -8,8 +8,6 @@ module Evergreen
 
     def build_application
       Rack::Builder.new do
-        instance_eval(&Evergreen.extensions) if Evergreen.extensions
-
         map "/" do
           app = Class.new(Sinatra::Base).tap do |app|
             app.reset!

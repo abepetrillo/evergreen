@@ -44,9 +44,4 @@ describe Evergreen, ".application" do
       page.should have_content('Fail')
     end
   end
-
-  it "should add extensions to Evergreen" do
-    visit('/awesome')
-    page.should have_content('Totally awesome')
-  end
 end

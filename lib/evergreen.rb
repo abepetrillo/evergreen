@@ -21,11 +21,6 @@ module Evergreen
       yield self
     end
 
-    def extensions(&block)
-      @extensions = block if block
-      @extensions
-    end
-
     def use_defaults!
       configure do |config|
         config.driver = :selenium
