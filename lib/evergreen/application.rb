@@ -10,23 +10,12 @@ module Evergreen
       Rack::Builder.new do
         instance_eval(&Evergreen.extensions) if Evergreen.extensions
 
-        map "/jasmine" do
-          use Rack::Static, :urls => ["/"], :root => File.expand_path('../jasmine/lib', File.dirname(__FILE__))
-          run lambda { |env| [404, {}, "No such file"]}
-        end
-
-        map "/resources" do
-          use Rack::Static, :urls => ["/"], :root => File.expand_path('resources', File.dirname(__FILE__))
-          run lambda { |env| [404, {}, "No such file"]}
-        end
-
         map "/" do
           app = Class.new(Sinatra::Base).tap do |app|
             app.reset!
             app.class_eval do
-              set :static, true
+              set :static, false
               set :root, File.expand_path('.', File.dirname(__FILE__))
-              set :public_folder, File.expand_path(File.join(Evergreen.root, Evergreen.public_dir), File.dirname(__FILE__))
 
               helpers do
                 def url(path)
@@ -58,6 +47,18 @@ module Evergreen
                 @js_spec_helper = @suite.get_spec('spec_helper.js')
                 @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
                 erb :run
+              end
+
+              get "/jasmine/*" do |path|
+                send_file File.expand_path(File.join('../jasmine/lib', path), File.dirname(__FILE__))
+              end
+
+              get "/resources/*" do |path|
+                send_file File.expand_path(File.join('resources', path), File.dirname(__FILE__))
+              end
+
+              get '/*' do |path|
+                send_file File.join(Evergreen.root, Evergreen.public_dir, path)
               end
             end
           end
