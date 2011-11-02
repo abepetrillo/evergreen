@@ -41,7 +41,11 @@ describe Evergreen::Application do
     visit("/")
     within('li', :text => 'failing_spec.js') do
       click_link("Run")
-      page.should have_content('Fail')
+      begin
+        page.should have_content('Fail')
+      rescue # why you make me sad, Capybara webkit???
+        page.should have_content('Fail')
+      end
     end
   end
 end

@@ -39,6 +39,7 @@ end
 RSpec.configure do |config|
   config.include EvergreenMatchers
   config.before do
+    Capybara.reset_sessions!
     Evergreen.use_defaults!
     Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
     Evergreen.driver = TEST_DRIVER
