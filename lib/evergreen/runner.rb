@@ -87,8 +87,7 @@ module Evergreen
 
     attr_reader :suite, :io
 
-    def initialize(suite, io=STDOUT)
-      @suite = suite
+    def initialize(io=STDOUT)
       @io = io
     end
 
@@ -137,6 +136,10 @@ module Evergreen
 
     def session
       @session ||= Capybara::Session.new(Evergreen.driver, Evergreen.application)
+    end
+
+    def suite
+      @suite ||= Evergreen::Suite.new
     end
 
   protected
