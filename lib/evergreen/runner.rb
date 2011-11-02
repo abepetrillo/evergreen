@@ -136,7 +136,7 @@ module Evergreen
     end
 
     def session
-      @session ||= Capybara::Session.new(Evergreen.driver, suite.application)
+      @session ||= Capybara::Session.new(Evergreen.driver, Evergreen.application)
     end
 
   protected

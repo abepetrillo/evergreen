@@ -11,7 +11,7 @@ TEST_DRIVER = :webkit
 
 Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
 
-Capybara.app = Evergreen.application
+Capybara.app = Evergreen::Application
 Capybara.default_driver = TEST_DRIVER
 
 module EvergreenMatchers
@@ -42,6 +42,5 @@ RSpec.configure do |config|
     Evergreen.use_defaults!
     Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
     Evergreen.driver = TEST_DRIVER
-    Evergreen.application = Evergreen.build_application
   end
 end

@@ -2,10 +2,6 @@ module Evergreen
   class Server
     attr_reader :suite
 
-    def initialize(suite)
-      @suite = suite
-    end
-
     def serve
       server.boot
       Launchy.open(server.url(Evergreen.mounted_at.to_s + '/'))
@@ -15,7 +11,7 @@ module Evergreen
   protected
 
     def server
-      @server ||= Capybara::Server.new(suite.application)
+      @server ||= Capybara::Server.new(Evergreen::Application)
     end
   end
 end

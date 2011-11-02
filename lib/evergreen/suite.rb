@@ -1,6 +1,6 @@
 module Evergreen
   class Suite
-    attr_reader :runner, :server, :driver, :application
+    attr_reader :driver
 
     def initialize
       paths = [
@@ -9,10 +9,6 @@ module Evergreen
         "#{ENV["HOME"]}/.evergreen"
       ]
       paths.each { |path| load(path) if File.exist?(path) }
-
-      @runner = Runner.new(self)
-      @server = Server.new(self)
-      @application = Evergreen.application
     end
 
     def root
@@ -21,14 +17,6 @@ module Evergreen
 
     def mounted_at
       Evergreen.mounted_at
-    end
-
-    def run
-      runner.run
-    end
-
-    def serve
-      server.serve
     end
 
     def get_spec(name)

@@ -15,7 +15,7 @@ module Evergreen
   autoload :Template, 'evergreen/template'
 
   class << self
-    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at
+    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at, :application
 
     def configure
       yield self
@@ -23,6 +23,7 @@ module Evergreen
 
     def use_defaults!
       configure do |config|
+        config.application = Evergreen::Application
         config.driver = :selenium
         config.public_dir = 'public'
         config.spec_dir = 'spec/javascripts'

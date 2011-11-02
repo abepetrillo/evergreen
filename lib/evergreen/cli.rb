@@ -16,10 +16,10 @@ module Evergreen
 
       case command
       when "serve"
-        Evergreen::Suite.new.serve
+        Evergreen::Server.new.serve
         return true
       when "run"
-        return Evergreen::Suite.new.run
+        return Evergreen::Runner.new.run
       else
         puts "no such command '#{command}'"
         return false
