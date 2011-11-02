@@ -11,7 +11,7 @@ module Evergreen
   protected
 
     def server
-      @server ||= Capybara::Server.new(Evergreen::Application)
+      @server ||= Capybara::Server.new(Evergreen.application)
     end
   end
 end
