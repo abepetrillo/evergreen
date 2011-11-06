@@ -47,6 +47,6 @@ describe('stylesheet', function() {
   template('one_template.html')
 
   it("should style the template", function() {
-    expect(document.getElementById('from-template').offsetWidth).toEqual(300)
+    expect($('#from-template').css('width')).toEqual('300px')
   });
 });
