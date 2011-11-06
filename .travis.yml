@@ -6,6 +6,8 @@ rvm:
  - ree
  - rbx
  - rbx-2.0
-before_script: 'sh -e /etc/init.d/xvfb start'
+before_script:
+ - 'git submodule update --init'
+ - 'sh -e /etc/init.d/xvfb start'
 env:
   - DISPLAY=':99.0'
