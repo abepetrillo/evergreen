@@ -32,7 +32,8 @@
       <% @suite.templates.each do |template| %>
         Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
       <% end %>
-      window.addEventListener('load', function() {
+      eventFunction = window.addEventListener ? 'addEventListener' : 'attachEvent';
+      window[eventFunction]('load', function() {
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.addReporter(new jasmine.TrivialReporter());
         jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
