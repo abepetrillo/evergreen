@@ -32,10 +32,12 @@
       <% @suite.templates.each do |template| %>
         Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
       <% end %>
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.addReporter(new jasmine.TrivialReporter());
-      jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
-      jasmineEnv.execute();
+      window.addEventListener('load', function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.addReporter(new jasmine.TrivialReporter());
+        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
+        jasmineEnv.execute();
+      });
     })();
   // ]]>
 </script>
