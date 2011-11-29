@@ -1,0 +1,10 @@
+rvm:
+ - 1.8.7
+ - 1.9.2
+ - 1.9.3
+ - ruby-head
+before_script:
+ - 'git submodule update --init'
+ - 'sh -e /etc/init.d/xvfb start'
+env:
+  - DISPLAY=':99.0'
