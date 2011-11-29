@@ -1,5 +1,7 @@
 = Evergreen
 
+{<img src="http://travis-ci.org/jnicklas/evergreen.png" />}[http://travis-ci.org/jnicklas/evergreen]
+
 "Because green is the new Blue(Ridge)"
 
 Evergreen is a tool to run javascript unit tests for client side JavaScript. It
