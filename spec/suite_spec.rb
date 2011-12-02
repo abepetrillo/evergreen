@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Evergreen::Suite do
-  subject { Evergreen::Suite.new }
+  let(:files) { [] }
+  subject { Evergreen::Suite.new(files) }
 
   its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
 
@@ -13,13 +14,25 @@ describe Evergreen::Suite do
 
   describe '#specs' do
     it "should find all specs recursively in the given root directory" do
-      subject.specs.map(&:name).should include('testing_spec.js', 'foo_spec.js', 'bar_spec.js', 'libs/lucid_spec.js', 'models/game_spec.js')
+      subject.specs.map(&:name).should include(*%w(testing_spec.js foo_spec.js bar_spec.js libs/lucid_spec.js models/game_spec.js))
     end
   end
 
   describe '#templates' do
     it "should find all specs in the given root directory" do
-      subject.templates.map(&:name).should include('one_template.html', 'another_template.html')
+      subject.templates.map(&:name).should include(*%w(one_template.html another_template.html))
     end
   end
+
+  context "files passed" do
+    let(:files) { %w(spec/javascripts/testing_spec.js spec/javascripts/libs/lucid_spec.js) }
+    it { should have(2).specs }
+
+    describe '#specs' do
+      it "should find specs passed to suite" do
+        subject.specs.map(&:name).should include(*%w(testing_spec.js libs/lucid_spec.js))
+      end
+    end
+  end
+
 end

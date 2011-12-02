@@ -85,10 +85,11 @@ module Evergreen
       end
     end
 
-    attr_reader :suite, :io
+    attr_reader :suite, :io, :options
 
-    def initialize(io=STDOUT)
+    def initialize(options, io=STDOUT)
       @io = io
+      @options = options
     end
 
     def spec_runner(spec)
@@ -139,7 +140,7 @@ module Evergreen
     end
 
     def suite
-      @suite ||= Evergreen::Suite.new
+      @suite ||= Evergreen::Suite.new(@options)
     end
 
   protected
