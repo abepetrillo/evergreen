@@ -1,0 +1,21 @@
+<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
+<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
+
+<script type="text/javascript">
+  // <![CDATA[
+    (function() {
+      var jasmineExecute = function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.addReporter(new jasmine.TrivialReporter());
+        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
+        jasmineEnv.execute();
+      };
+      if (window.addEventListener) {
+        window.addEventListener("load", jasmineExecute, false);
+      }
+      else {
+        window.attachEvent("onload", jasmineExecute);
+      }
+    })();
+  // ]]>
+</script>
