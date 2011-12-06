@@ -1,1 +1,41 @@
 <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+
+<script type="text/javascript">
+  // <![CDATA[
+    (function() {
+     var yuiExecute = function() {
+       YUI().use("test", "json-parse", "json-stringify", function (Y) {
+         function runnerStarting() {
+           Evergreen.results = [];
+         }
+
+         function testCaseFinished(results) { 
+           Evergreen.results.push({
+             name: results.name,
+             passed: results.failed === 0,
+             message: 'I need to be the last failed assertion',
+             trace: 'I need to be a trace, if even possible',
+            });
+            Evergreen.dots += (results.failedCount === 0) ? "." : "F";
+          }
+
+          function runnerFinished(results) { 
+            Evergreen.done = true;
+            if(Evergreen.onDone) { Evergreen.onDone() }
+          }
+
+          Y.Test.Runner.subscribe(Y.Test.Runner.BEGIN_EVENT, runnerStarting);
+          Y.Test.Runner.subscribe(Y.Test.Runner.TEST_CASE_COMPLETE_EVENT, testCaseFinished);
+          Y.Test.Runner.subscribe(Y.Test.Runner.COMPLETE_EVENT, runnerFinished);
+          Y.Test.Runner.run();      
+       })
+      };
+      if (window.addEventListener) {
+        window.addEventListener("load", yuiExecute, false);
+      }
+      else {
+        window.attachEvent("onload", yuiExecute);
+      }
+    })();
+  // ]]>
+</script>
