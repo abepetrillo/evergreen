@@ -1,5 +1,4 @@
 .rvmrc
 .bundle
-Gemfile.lock
 .tddium*
 .tddium
