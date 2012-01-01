@@ -6,6 +6,10 @@
   // <![CDATA[
       <%= render_spec(@coffee_spec_helper) if @coffee_spec_helper.exist? %>;
       <%= render_spec(@js_spec_helper) if @js_spec_helper.exist? %>;
+  // ]]>
+</script>
+<script type="text/javascript">
+  // <![CDATA[
       <% if @spec %>
         <%= render_spec(@spec) %>
       <% else %>
