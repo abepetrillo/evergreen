@@ -22,16 +22,12 @@ module Evergreen
 
     get '/run/all' do
       @suite = Evergreen::Suite.new
-      @js_spec_helper = @suite.get_spec('spec_helper.js')
-      @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
       erb :run
     end
 
     get '/run/*' do |name|
       @suite = Evergreen::Suite.new
-      @spec = @suite.get_spec(name)
-      @js_spec_helper = @suite.get_spec('spec_helper.js')
-      @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
+      @spec  = @suite.get_spec(name)
       erb :run
     end
 
@@ -46,5 +42,6 @@ module Evergreen
     get '/*' do |path|
       send_file File.join(Evergreen.root, Evergreen.public_dir, path)
     end
+
   end
 end
