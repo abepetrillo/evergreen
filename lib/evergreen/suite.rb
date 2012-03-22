@@ -34,5 +34,11 @@ module Evergreen
         Template.new(self, File.basename(path))
       end
     end
+
+    def helpers
+      Dir.glob(File.join(root, Evergreen.helper_dir, '*')).map do |path|
+        Helper.new(self, File.basename(path))
+      end
+    end
   end
 end

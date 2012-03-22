@@ -22,4 +22,10 @@ describe Evergreen::Suite do
       subject.templates.map(&:name).should include('one_template.html', 'another_template.html')
     end
   end
+
+  describe '#spec_helpers' do
+    it "should find all spec helpers in the given helpers directory" do
+      subject.helpers.map(&:name).should include('spec_helper.js', 'spec_helper.coffee')
+    end
+  end
 end
