@@ -21,15 +21,7 @@ testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 == Maintainance note
 
 Evergreen is currently unmaintained. If you would like to take over maintainance
-of the project, please [contact me](http://github.com/jnicklas) directly.
-
-== Community
-
-Please ask questions on the {mailing
-list}[http://groups.google.com/group/ruby-evergreen].  If you have found a
-reproducible error, please {file it on
-GitHub}[https://github.com/jnicklas/evergreen/issues]. Do not contact the
-maintainers directly.
+of the project, please {contact me}[http://github.com/jnicklas] directly.
 
 == Installation
 
