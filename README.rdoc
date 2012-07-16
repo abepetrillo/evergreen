@@ -18,6 +18,11 @@ isolation from your application. If you need a tool that tests how your
 JavaScript integrates with your application you should use an integration
 testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 
+== Maintainance note
+
+Evergreen is currently unmaintained. If you would like to take over maintainance
+of the project, please [contact me](http://github.com/jnicklas) directly.
+
 == Community
 
 Please ask questions on the {mailing
