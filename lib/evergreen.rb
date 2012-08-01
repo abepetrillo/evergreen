@@ -7,6 +7,7 @@ require 'evergreen/application'
 require 'json'
 
 module Evergreen
+  autoload :FilesHelper, 'evergreen/files_helper'
   autoload :Cli, 'evergreen/cli'
   autoload :Server, 'evergreen/server'
   autoload :Runner, 'evergreen/runner'

@@ -20,7 +20,7 @@ module EvergreenMatchers
   class PassSpec # :nodoc:
     def matches?(actual)
       @actual = actual
-      @runner = Evergreen::Runner.new(StringIO.new).spec_runner(@actual)
+      @runner = Evergreen::Runner.new([], StringIO.new).spec_runner(@actual)
       @runner.passed?
     end
 

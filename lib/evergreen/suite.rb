@@ -1,8 +1,11 @@
 module Evergreen
-  class Suite
-    attr_reader :driver
 
-    def initialize
+  class Suite
+
+    attr_reader :driver, :files
+
+    def initialize(files = [])
+      @files = files
       paths = [
         File.expand_path("config/evergreen.rb", root),
         File.expand_path(".evergreen", root),
@@ -19,20 +22,26 @@ module Evergreen
       Evergreen.mounted_at
     end
 
+    def files_helper
+      Evergreen::FilesHelper
+    end
+
     def get_spec(name)
       Spec.new(self, name)
     end
 
     def specs
-      Dir.glob(File.join(root, Evergreen.spec_dir, '**/*_spec.{js,coffee}')).map do |path|
+      files_helper.find_specs(@files).map do |path|
         Spec.new(self, path.gsub(File.join(root, Evergreen.spec_dir, ''), ''))
       end
     end
 
     def templates
-      Dir.glob(File.join(root, Evergreen.template_dir, '*')).map do |path|
+      files_helper.find_templates.map do |path|
         Template.new(self, File.basename(path))
       end
     end
+
   end
+
 end

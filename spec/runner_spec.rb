@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Evergreen::Runner do
   let(:suite) { Evergreen::Suite.new }
-  let(:runner) { Evergreen::Runner.new(buffer) }
+  let(:args) { [] }
+  let(:runner) { Evergreen::Runner.new(args, buffer) }
   let(:buffer) { StringIO.new }
 
   describe '#run' do

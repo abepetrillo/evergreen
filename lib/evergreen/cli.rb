@@ -6,7 +6,7 @@ module Evergreen
 
     def execute(argv)
       command = argv.shift
-      Evergreen.root = File.expand_path(argv.shift || '.', Dir.pwd)
+      Evergreen.root = File.expand_path('.', Dir.pwd)
 
       # detect Rails apps
       if File.exist?(File.join(Evergreen.root, 'config/environment.rb'))
@@ -19,7 +19,7 @@ module Evergreen
         Evergreen::Server.new.serve
         return true
       when "run"
-        return Evergreen::Runner.new.run
+        return Evergreen::Runner.new(argv).run
       else
         puts "no such command '#{command}'"
         return false
