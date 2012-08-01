@@ -1,0 +1,53 @@
+<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
+<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
+
+<script type="text/javascript">
+  // <![CDATA[
+    (function() {
+  
+      Evergreen.ReflectiveReporter = function() {
+        this.reportRunnerStarting = function(runner) {
+          Evergreen.results = [];
+        };
+        this.reportSpecResults = function(spec) {
+          var results = spec.results();
+          var item = results.getItems()[0] || {};
+          Evergreen.results.push({
+            name: spec.getFullName(),
+            passed: results.failedCount === 0,
+            message: item.message,
+            trace: item.trace
+          });
+          Evergreen.dots += (results.failedCount === 0) ? "." : "F";
+        };
+        this.reportRunnerResults = function(runner) {
+          Evergreen.done = true;
+          if(Evergreen.onDone) { Evergreen.onDone() }
+        };
+      };
+
+      beforeEach(function() {
+        document.getElementById('test').innerHTML = "";
+      });
+
+      var template = function(name) {
+        beforeEach(function() {
+          document.getElementById('test').innerHTML = Evergreen.templates[name]
+        });
+      };
+
+      var jasmineExecute = function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.addReporter(new jasmine.TrivialReporter());
+        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
+        jasmineEnv.execute();
+      };
+      if (window.addEventListener) {
+        window.addEventListener("load", jasmineExecute, false);
+      }
+      else {
+        window.attachEvent("onload", jasmineExecute);
+      }
+    })();
+  // ]]>
+</script>

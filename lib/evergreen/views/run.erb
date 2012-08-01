@@ -1,5 +1,4 @@
-<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
-<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
+<%= render_framework_javascript_includes %>
 <script type="text/javascript" src="<%= url("/resources/json2.js") %>"></script>
 <script type="text/javascript" src="<%= url("/resources/run.js") %>"></script>
 <script type="text/javascript">
@@ -32,18 +31,6 @@
       <% @suite.templates.each do |template| %>
         Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
       <% end %>
-      var jasmineExecute = function() {
-        var jasmineEnv = jasmine.getEnv();
-        jasmineEnv.addReporter(new jasmine.TrivialReporter());
-        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
-        jasmineEnv.execute();
-      };
-      if (window.addEventListener) {
-        window.addEventListener("load", jasmineExecute, false);
-      }
-      else {
-        window.attachEvent("onload", jasmineExecute);
-      }
     })();
   // ]]>
 </script>

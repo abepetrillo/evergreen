@@ -13,6 +13,14 @@ module Evergreen
       rescue StandardError => error
         erb :_spec_error, :locals => { :error => error }
       end
+
+      def render_framework_javascript_includes
+        erb "includes/javascripts/_#{Evergreen.framework}".to_sym 
+      end
+
+      def render_framework_stylesheet_includes
+        erb "includes/stylesheets/_#{Evergreen.framework}".to_sym 
+      end
     end
 
     get '/' do
