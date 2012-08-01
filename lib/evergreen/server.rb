@@ -5,6 +5,7 @@ module Evergreen
     def serve
       server.boot
       Launchy.open(server.url(Evergreen.mounted_at.to_s + '/'))
+      trap('SIGINT') { puts 'Shutting down...' ; exit 0 }
       sleep
     end
 
