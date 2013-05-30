@@ -1,10 +1,10 @@
 require('/jquery.js');
-stylesheet('/styles.css')
+stylesheet('/styles.css');
 
 describe('templates', function() {
 
   describe('with template', function() {
-    template('one_template.html')
+    template('one_template.html');
 
     it("should append the template to the test div", function() {
       expect($('#test h1#from-template').length).toEqual(1);
@@ -26,7 +26,7 @@ describe('templates', function() {
   });
 
   describe('with another template', function() {
-    template('another_template.html')
+    template('another_template.html');
 
     it("should append the template to the test div", function() {
       expect($('#test h1#another-template').length).toEqual(1);
@@ -34,7 +34,7 @@ describe('templates', function() {
   });
 
   describe('with template with script tags', function() {
-    template('script_tags.html')
+    template('script_tags.html');
 
     it("should append the template to the test div", function() {
       expect($('#test h1#script-tags').length).toEqual(1);
@@ -44,9 +44,9 @@ describe('templates', function() {
 });
 
 describe('stylesheet', function() {
-  template('one_template.html')
+  template('one_template.html');
 
   it("should style the template", function() {
-    expect($('#from-template').css('width')).toEqual('300px')
+    expect($('#from-template').css('width')).toEqual('300px');
   });
 });
