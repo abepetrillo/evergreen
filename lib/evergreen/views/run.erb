@@ -4,8 +4,10 @@
 <script type="text/javascript" src="<%= url("/resources/run.js") %>"></script>
 <script type="text/javascript">
   // <![CDATA[
-      <%= render_spec(@coffee_spec_helper) if @coffee_spec_helper.exist? %>;
-      <%= render_spec(@js_spec_helper) if @js_spec_helper.exist? %>;
+      <% @suite.helpers.each do |helper| %>
+        <%= render_spec(helper) %>;
+      <% end %>
+
       <% if @spec %>
         <%= render_spec(@spec) %>
       <% else %>
