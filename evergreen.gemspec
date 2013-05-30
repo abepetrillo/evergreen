@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.version = Evergreen::VERSION
 
   s.authors = ["Jonas Nicklas"]
-  s.email = ["jonas.nicklas@gmail.com"]
+  s.email = ["jonas.nicklas@gmail.com", "abe.petrillo@gmail.com"]
   s.description = "Run Jasmine JavaScript unit tests, integrate them into Ruby applications."
 
   s.files = Dir.glob("{bin,lib,spec,config}/**/*") + %w(README.rdoc)
