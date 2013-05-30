@@ -1,4 +1,4 @@
-require('/foo.js')
+require('/foo.js');
 
 describe('awesome', function() {
   template('foo.html');
