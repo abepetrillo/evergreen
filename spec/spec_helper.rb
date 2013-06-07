@@ -9,6 +9,9 @@ require 'capybara-webkit'
 
 require 'pry'
 
+require 'coveralls'
+Coveralls.wear!
+
 TEST_DRIVER = :webkit
 
 Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))

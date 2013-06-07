@@ -1,4 +1,5 @@
 module Evergreen
+  #Translates the arguments passed in from the command line
   class Cli
     def self.execute(argv)
       new.execute(argv)
