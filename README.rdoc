@@ -1,6 +1,8 @@
 = Evergreen
 
 {<img src="http://travis-ci.org/jnicklas/evergreen.png" />}[http://travis-ci.org/jnicklas/evergreen]
+{<img src="https://coveralls.io/repos/abepetrillo/evergreen/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/abepetrillo/evergreen]
+
 
 "Because green is the new Blue(Ridge)"
 
