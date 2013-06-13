@@ -1,3 +1,7 @@
 .rvmrc
 .bundle
 Gemfile.lock
+Gruntfile.js
+.rbenv-version
+node_modules
+coverage/*
