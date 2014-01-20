@@ -49,7 +49,7 @@ module Evergreen
 
           previous_results = ""
 
-          session.wait_until(300) do
+          Evergreen.timeout(300) do
             dots = session.evaluate_script('Evergreen.dots')
             io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
             io.flush
@@ -149,3 +149,5 @@ module Evergreen
     end
   end
 end
+
+

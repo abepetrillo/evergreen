@@ -5,6 +5,7 @@ require 'launchy'
 require 'evergreen/version'
 require 'evergreen/application'
 require 'json'
+require 'evergreen/utils/timeout'
 
 module Evergreen
   autoload :Cli, 'evergreen/cli'
