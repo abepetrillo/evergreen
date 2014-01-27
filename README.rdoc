@@ -143,7 +143,7 @@ function in your specs:
 
 If you add a spec_helper file like so:
 
-    spec/javascripts/spec_helper.js
+    spec/javascripts/helpers/spec_helper.js
 
 It will automatically be loaded. This is a great place for adding custom
 matchers and the like.
@@ -161,7 +161,7 @@ You can also add a CoffeeScript spec helper, but remember that CoffeeScript
 encloses individual files in a closure, if you need something you define in the
 spec helper to be available in your spec files, attach it to the window object:
 
-    # spec/javascripts/spec_helper.coffee
+    # spec/javascripts/helpers/spec_helper.coffee
 
     MyThing: "foo"          # local to spec helper
     window.MyThing: "foo"   # global
