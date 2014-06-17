@@ -10,8 +10,6 @@ describe Evergreen::Runner do
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
-
-      it { should include('.F..') }
       it { should include("Expected 'bar' to equal 'noooooo'") }
       it { should include("18 examples, 3 failures") }
     end
