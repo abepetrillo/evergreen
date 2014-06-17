@@ -10,7 +10,7 @@ combines a server which allows you to serve up and run your specs in a browser,
 as well as a runner which uses Capybara and any of its drivers to run your
 specs. Evergreen uses the Jasmine unit testing framework for JavaScript.
 
-http://github.com/jnicklas/evergreen
+http://github.com/abepetrillo/evergreen
 
 == Philosophy
 
