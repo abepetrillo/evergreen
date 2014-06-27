@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rspec/its'
 
 describe Evergreen::Helper do
   let(:suite) { Evergreen::Suite.new }
