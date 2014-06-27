@@ -23,13 +23,14 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.3.6"
   s.summary = "Run Jasmine JavaScript unit tests, integrate them into Ruby applications."
 
-  s.add_runtime_dependency("capybara", ["~> 2.1.0"])
+  s.add_runtime_dependency("capybara", [">= 2.1.0"])
   s.add_runtime_dependency("launchy")
   s.add_runtime_dependency("sinatra", ["~> 1.1"])
   s.add_runtime_dependency("json_pure")
   s.add_runtime_dependency("coffee-script")
 
   s.add_development_dependency('rspec', ['~> 2.0'])
+  s.add_development_dependency('rspec-its')
   s.add_development_dependency('capybara-webkit')
   s.add_development_dependency('therubyracer', ['~> 0.9'])
   s.add_development_dependency('rake')
