@@ -1,6 +1,6 @@
 rvm:
+ - 2.1.2
  - 1.9.3-p545
- - ruby-head
 before_script:
  - 'git submodule update --init'
  - 'sh -e /etc/init.d/xvfb start'
