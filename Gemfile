@@ -2,5 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'pry'
+group :development, :test do
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+end
 
+gem 'pry'
