@@ -5,14 +5,14 @@ require 'evergreen'
 require 'rspec'
 
 require 'capybara/dsl'
-require 'capybara-webkit'
+require 'capybara/poltergeist'
 
 require 'pry'
 
 require 'coveralls'
 Coveralls.wear!
 
-TEST_DRIVER = :webkit
+TEST_DRIVER = :poltergeist
 
 Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
 
