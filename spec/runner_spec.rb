@@ -10,8 +10,8 @@ describe Evergreen::Runner do
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
-      it { should include("Expected 'bar' to equal 'noooooo'") }
-      it { should include("18 examples, 3 failures") }
+      it { is_expected.to include("Expected 'bar' to equal 'noooooo'") }
+      it { is_expected.to include("18 examples, 3 failures") }
     end
   end
 
@@ -22,9 +22,9 @@ describe Evergreen::Runner do
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }
 
-      it { should include('.F') }
-      it { should include("Expected 'bar' to equal 'noooooo'") }
-      it { should include("2 examples, 1 failures") }
+      it { is_expected.to include('.F') }
+      it { is_expected.to include("Expected 'bar' to equal 'noooooo'") }
+      it { is_expected.to include("2 examples, 1 failures") }
     end
   end
 end

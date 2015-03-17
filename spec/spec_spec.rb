@@ -4,24 +4,28 @@ describe Evergreen::Spec do
   let(:suite) { Evergreen::Suite.new }
   subject { Evergreen::Spec.new(suite, 'testing_spec.js') }
 
-  its(:name) { should == 'testing_spec.js' }
-  its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
-  its(:full_path) { should == File.expand_path("spec/javascripts/testing_spec.js", Evergreen.root) }
-  its(:url) { should == "/run/testing_spec.js" }
-  its(:contents) { should =~ /describe\('testing'/ }
+  it 'has the correct details' do
+    expect(subject.name).to eq 'testing_spec.js'
+    expect(subject.root).to eq File.expand_path('suite1', File.dirname(__FILE__))
+    expect(subject.full_path).to eq File.expand_path("spec/javascripts/testing_spec.js", Evergreen.root)
+    expect(subject.url).to eq "/run/testing_spec.js"
+    expect(subject.contents).to include "describe\('testing'"
+  end
 
   context "with coffeescript" do
     subject { Evergreen::Spec.new(suite, 'coffeescript_spec.coffee') }
-    its(:contents) { should =~ /describe\('coffeescript', function/ }
+    it 'contains coffeescript' do
+      expect(subject.contents).to include "describe\('coffeescript', function"
+    end
   end
 
   context "with existing spec file" do
-    it { should exist }
+    it { is_expected.to exist }
   end
 
   context "with missing spec file" do
     subject { Evergreen::Spec.new(suite, 'does_not_exist.js') }
-    it { should_not exist }
+    it { is_expected.not_to exist }
   end
 
 end

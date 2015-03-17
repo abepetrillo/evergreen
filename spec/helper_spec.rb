@@ -1,26 +1,36 @@
 require 'spec_helper'
-require 'rspec/its'
 
 describe Evergreen::Helper do
   let(:suite) { Evergreen::Suite.new }
   subject { Evergreen::Helper.new(suite, 'spec_helper.js') }
 
-  its(:name) { should == 'spec_helper.js' }
-  its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
-  its(:full_path) { should == File.expand_path("spec/javascripts/helpers/spec_helper.js", Evergreen.root) }
-  its(:contents)  { should =~ %r(var SpecHelper = { spec: 'helper' };) }
+
+  it 'has the corrent details' do
+    expect(subject.name).to eq 'spec_helper.js'
+    expect(subject.root).to eq File.expand_path('suite1', File.dirname(__FILE__))
+    expect(subject.full_path).to eq File.expand_path("spec/javascripts/helpers/spec_helper.js", Evergreen.root)
+    expect(subject.contents).to eq  "var SpecHelper = { spec: 'helper' };\n"
+  end
 
   context "with coffeescript" do
     subject { Evergreen::Helper.new(suite, 'spec_helper.coffee') }
-    its(:contents) { should =~ /window.CoffeeSpecHelper/ }
+    it 'load the coffeeScript helper' do
+      expect(subject.contents).to include 'window.CoffeeSpecHelper'
+    end
   end
 
-  context "with existing spec file" do
-    it { should exist }
-  end
+  describe '.exists' do
+    context 'with existing spec file' do
+      it 'returns true' do
+        expect(subject.exist?).to eq true
+      end
+    end
 
-  context "with missing spec file" do
-    subject { Evergreen::Helper.new(suite, 'does_not_exist.js') }
-    it { should_not exist }
+    context "with missing spec file" do
+      subject { Evergreen::Helper.new(suite, 'does_not_exist.js') }
+      it 'returns false' do
+        expect(subject.exist?).to eq false
+      end
+    end
   end
 end
