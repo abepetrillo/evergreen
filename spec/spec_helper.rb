@@ -31,7 +31,7 @@ module EvergreenMatchers
       "expected #{@actual.name} to pass, but it failed with:\n\n#{@runner.failure_messages}"
     end
 
-    def negative_failure_message
+    def failure_message_when_negated
       "expected #{@actual.name} not to pass, but it did"
     end
   end

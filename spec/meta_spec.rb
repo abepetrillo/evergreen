@@ -47,4 +47,3 @@ describe Evergreen::Runner do
     end
   end
 end
-
