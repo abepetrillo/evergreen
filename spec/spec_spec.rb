@@ -20,12 +20,12 @@ describe Evergreen::Spec do
   end
 
   context "with existing spec file" do
-    it { should exist }
+    it { is_expected.to exist }
   end
 
   context "with missing spec file" do
     subject { Evergreen::Spec.new(suite, 'does_not_exist.js') }
-    it { should_not exist }
+    it { is_expected.not_to exist }
   end
 
 end

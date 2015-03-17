@@ -9,27 +9,27 @@ describe Evergreen::Runner do
 
     context "with transactions spec" do
       let(:template) { 'transactions_spec.js' }
-      it { should pass }
+      it { is_expected.to pass }
     end
 
     context "with spec helper" do
       let(:template) { 'with_helper_spec.js' }
-      it { should pass }
+      it { is_expected.to pass }
     end
 
     context "with template spec" do
       let(:template) { 'templates_spec.js' }
-      it { should pass }
+      it { is_expected.to pass }
     end
 
     context "invalid coffee" do
       let(:template) { 'invalid_coffee_spec.coffee' }
-      it { should_not pass }
+      it { is_expected.not_to pass }
     end
 
     context "with slow failing spec" do
       let(:template) { 'slow_spec.coffee' }
-      it { should_not pass }
+      it { is_expected.not_to pass }
     end
   end
 
@@ -38,12 +38,12 @@ describe Evergreen::Runner do
 
     context "with awesome spec" do
       let(:template) { 'awesome_spec.js' }
-      it { should pass }
+      it { is_expected.to pass }
     end
 
     context "with failing spec" do
       let(:template) { 'failing_spec.js' }
-      it { should_not pass }
+      it { is_expected.not_to pass }
     end
   end
 end
