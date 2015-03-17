@@ -21,6 +21,11 @@ Capybara.default_driver = TEST_DRIVER
 
 module EvergreenMatchers
   class PassSpec # :nodoc:
+
+    def description
+      'Successfull if the runner manages to pass all the JS specs'
+    end
+
     def matches?(actual)
       @actual = actual
       @runner = Evergreen::Runner.new(StringIO.new).spec_runner(@actual)

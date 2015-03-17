@@ -2,6 +2,7 @@
 
 {<img src="https://travis-ci.org/abepetrillo/evergreen.png" />}[http://travis-ci.org/abepetrillo/evergreen]
 {<img src="https://coveralls.io/repos/abepetrillo/evergreen/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/abepetrillo/evergreen]
+{<img src="https://codeclimate.com/github/abepetrillo/evergreen/badges/gpa.svg" />}[https://codeclimate.com/github/abepetrillo/evergreen]
 
 "Because green is the new Blue(Ridge)"
 

@@ -46,4 +46,19 @@ describe Evergreen::Runner do
       it { is_expected.not_to pass }
     end
   end
+
+  context 'when noConflict is called via JS' do
+    before { Evergreen.root = File.expand_path('suite3', File.dirname(__FILE__)) }
+    let(:template) { 'awesome_spec.js' }
+    it 'does not over-ride existing methods in window' do
+      expect(subject).to pass
+    end
+
+    context 'and not using the Evergreen namespace' do
+      let(:template) { 'failing_spec.js' }
+      it 'fails' do
+        expect(subject).to_not pass
+      end
+    end
+  end
 end
