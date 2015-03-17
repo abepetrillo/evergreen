@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "evergreen"
   s.version = Evergreen::VERSION
 
-  s.authors = ["Jonas Nicklas"]
+  s.authors = ["Jonas Nicklas", "Abe Petrillo"]
   s.email = ["jonas.nicklas@gmail.com", "abe.petrillo@gmail.com"]
   s.description = "Run Jasmine JavaScript unit tests, integrate them into Ruby applications."
 
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.executables = ['evergreen']
 
-  s.homepage = "http://github.com/jnicklas/evergreen"
+  s.homepage = "http://github.com/abepetrillo/evergreen"
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.3.6"
@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("json_pure")
   s.add_runtime_dependency("coffee-script")
 
-  s.add_development_dependency('rspec', ['~> 2.0'])
+  s.add_development_dependency('rspec', ['>=3.2.0'])
   s.add_development_dependency('rspec-its')
   s.add_development_dependency('therubyracer', ['~> 0.9'])
   s.add_development_dependency('rake')
