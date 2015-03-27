@@ -49,7 +49,7 @@ module Evergreen
 
           previous_results = ""
 
-          Evergreen.timeout(Evergreen.spec_timeout) do
+          Evergreen.timeout(Evergreen.spec_timeout, "#{spec.name} timed out!") do
             dots = session.evaluate_script('Evergreen.dots')
             io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
             io.flush
