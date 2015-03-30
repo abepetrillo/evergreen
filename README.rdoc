@@ -99,7 +99,12 @@ The content of these files could look like this:
       config.public_dir = 'public_html'
       config.template_dir = 'templates'
       config.spec_dir = 'spec'
+      config.statistics_output_file = 'evergreen_run_statistics.csv'
     end
+
+Evergreen is able to gather and export to CSV statistics about the SPECS run time.
+The file to which the data is exported is set by the <tt>statistics_output_file</tt> parameter.
+If this parameter is not set, no statistics are gathered.
 
 == Transactions
 

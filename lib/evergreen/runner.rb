@@ -1,3 +1,5 @@
+require 'evergreen/utils/statistics'
+
 module Evergreen
   class Runner
     class Example
@@ -45,20 +47,25 @@ module Evergreen
 
       def examples
         @results ||= begin
-          session.visit(spec.url)
+          statistics.spec_start(spec)
 
+          session.visit(spec.url)
           previous_results = ""
 
           Evergreen.timeout(Evergreen.spec_timeout, "#{spec.name} timed out!") do
+
             dots = session.evaluate_script('Evergreen.dots')
             io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
             io.flush
             previous_results = dots
             session.evaluate_script('Evergreen.done')
+
           end
 
           dots = session.evaluate_script('Evergreen.dots')
           io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
+
+          statistics.spec_end
 
           JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
             Example.new(row)
@@ -83,6 +90,13 @@ module Evergreen
           examples.map { |example| example.failure_message }.compact.join("\n\n")
         end
       end
+
+      private
+
+      def statistics
+        runner.statistics
+      end
+
     end
 
     attr_reader :suite, :io
@@ -142,12 +156,20 @@ module Evergreen
       @suite ||= Evergreen::Suite.new
     end
 
-  protected
+    def statistics
+      @statistics ||= statistics_class.new(Evergreen.statistics_output_file)
+    end
+
+    protected
+
+    def statistics_class
+      (Evergreen.statistics_output_file != nil) ? Evergreen::Statistics : Evergreen::EmptyStatistics
+    end
 
     def spec_runners
       @spec_runners ||= suite.specs.map { |spec| SpecRunner.new(self, spec) }
     end
+
   end
 end
-
 
