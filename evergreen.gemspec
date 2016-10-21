@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.authors = ["Jonas Nicklas", "Abe Petrillo"]
   s.email = ["jonas.nicklas@gmail.com", "abe.petrillo@gmail.com"]
   s.description = "Run Jasmine JavaScript unit tests, integrate them into Ruby applications."
+  s.license = "MIT"
 
   s.files = Dir.glob("{bin,lib,spec,config}/**/*") + %w(README.rdoc)
   s.extra_rdoc_files = ["README.rdoc"]
@@ -29,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("json_pure")
   s.add_runtime_dependency("coffee-script")
 
-  s.add_development_dependency('rspec', ['>=3.2.0'])
+  s.add_development_dependency('rspec', ['~>3.2'])
   s.add_development_dependency('therubyracer', ['~> 0.9'])
   s.add_development_dependency('rake')
   s.add_development_dependency('coveralls')
