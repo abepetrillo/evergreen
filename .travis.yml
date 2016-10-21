@@ -1,5 +1,5 @@
 rvm:
- - 1.9.3-p545
+ - 2.1.3
  - ruby-head
 before_script:
  - 'git submodule update --init'
