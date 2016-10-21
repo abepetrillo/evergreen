@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("capybara", [">= 2.1.0"])
   s.add_runtime_dependency("launchy")
   s.add_runtime_dependency("sinatra", [">= 1.1"])
+  s.add_runtime_dependency("mime-types-data", ["<= 3.0.0"])
   s.add_runtime_dependency("json_pure")
   s.add_runtime_dependency("coffee-script")
 
