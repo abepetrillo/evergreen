@@ -30,7 +30,7 @@ module Evergreen
     end
 
     def templates
-      Dir.glob(File.join(root, Evergreen.template_dir, '*')).map do |path|
+      Dir.glob(File.join(root, Evergreen.template_dir, '**/*')).map do |path|
         Template.new(self, File.basename(path))
       end
     end
