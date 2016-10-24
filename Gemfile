@@ -4,7 +4,7 @@ gemspec
 
 group :development, :test do
   gem 'poltergeist'
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'phantomjs', '>=2.1.1', :require => 'phantomjs/poltergeist'
 end
 
 gem 'pry'
