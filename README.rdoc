@@ -70,14 +70,23 @@ There's a rake task provided for you that you can use to run your specs:
 
     rake spec:javascripts
 
-== Integrating with Rails 2
+== Integrating with Rails 2.3
 
 Add the following line to your Rakefile:
 
     require 'evergreen/tasks'
 
-This will give you the `spec:javascripts` rake task. Note that mounting is not
-possible under Rails 2 and that `require 'evergreen/rails'` will fail.
+This will give you the `spec:javascripts` rake task.
+
+To mount the spec runner, add the following to your config/environments/development.rb file:
+
+    config.after_initialize do
+      require "evergreen/rails2"
+      config.middleware.insert_before "ActionController::Failsafe", "Evergreen::Rails2"
+    end
+
+Start your rails application and navigate to /evergreen. You should now see a
+list of all spec files, click on one to run it.
 
 == Configuration
 
