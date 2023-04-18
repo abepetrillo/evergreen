@@ -31,7 +31,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("coffee-script")
 
   s.add_development_dependency('rspec', ['~>3.2'])
-  s.add_development_dependency('therubyracer', ['~> 0.9'])
   s.add_development_dependency('rake')
   s.add_development_dependency('coveralls')
 end
