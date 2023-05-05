@@ -1,9 +1,12 @@
 = Evergreen
 
-{<img src="https://coveralls.io/repos/github/abepetrillo/evergreen/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/abepetrillo/evergreen?branch=master]
-{<img src="https://api.codeclimate.com/v1/badges/1bc70455454cbc60dd67/maintainability" />}[https://codeclimate.com/github/abepetrillo/evergreen/maintainability]
 
-"Because green is the new Blue(Ridge)"
+rdoc-image:https://coveralls.io/repos/github/abepetrillo/evergreen/badge.svg?branch=master
+
+rdoc-image:https://api.codeclimate.com/v1/badges/1bc70455454cbc60dd67/maintainability
+
+
+"Because green is the new Blue(Ridge)"gi
 
 Evergreen is a tool to run javascript unit tests for client side JavaScript. It
 combines a server which allows you to serve up and run your specs in a browser,
