@@ -5,19 +5,24 @@ require 'evergreen'
 require 'rspec'
 
 require 'capybara/dsl'
-require 'capybara/poltergeist'
+require "capybara/cuprite"
 
 require 'pry'
 
 require 'coveralls'
 Coveralls.wear!
 
-TEST_DRIVER = :poltergeist
+TEST_DRIVER = :cuprite
 
 Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__))
 
 Capybara.app = Evergreen::Application
 Capybara.default_driver = TEST_DRIVER
+
+Capybara.javascript_driver = :cuprite
+Capybara.register_driver(:cuprite) do |app|
+  Capybara::Cuprite::Driver.new(app, window_size: [1200, 800])
+end
 
 module EvergreenMatchers
   class PassSpec # :nodoc:
